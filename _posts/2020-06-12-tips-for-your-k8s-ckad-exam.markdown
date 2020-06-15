@@ -3,27 +3,33 @@ layout: post
 title:  "CKAD Exam Tips"
 date:   2020-06-12 08:22:51 +0200
 categories: Kubernetes Certification CNCF
+feedback: "https://docs.google.com/forms/d/e/1FAIpQLSc6wUtP7uzMhf_gCZgWwxtrl3dgZCyd1qVaJa71Nib0U9fHJA/viewform?usp=pp_url&entry.276315985=CKAD+Exam+Notes&entry.486182672=Yes"
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-Jekyll requires blog post files to be named according to the following format:
+If you like this blog article please [don't forget to click here]({{ page.feedback}})
 
-`YEAR-MONTH-DAY-title.MARKUP`
+This blog post summarizes the study notes I took during the preparation of the CKAD exam. 
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+The Certified Kubernetes Application Developer is a certification offered by the Cloud Native Computing Foundation.
+It is intended to assess your skills as an application developer who can take advantage of the modern container orchestration
+features offered by Kubernetes. 
 
-Jekyll also offers powerful support for code snippets:
+In order to pass the exam it is fundamental not only to understand the main K8s primitives 
+but also to be pretty fluent with the `kubectl` command line. Thus, it is very important to remember the most used
+command line options and the main elements of the K8s object manifests (YAML). 
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+
+Explain data structures
+
+{% highlight bash %}
+kubectl explain pod.spec.containers --recursive | more
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+Help with kubectl commands
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+{% highlight bash %}
+kubectl create deployment --help
+{% endhighlight %}
+
+Have you enjoyed this article? Was it useful? 
+Tell me you feedback [here]({{ page.feedback}})
