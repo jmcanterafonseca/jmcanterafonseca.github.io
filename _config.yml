@@ -24,6 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Software Engineering, Cloud Native Computing, IoT for Smart Cities and Open Linked Data.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://canterafonseca.eu" # the base hostname & protocol for your site, e.g. http://example.com
+root: ""
 twitter_username: jmcantera
 github_username:  jmcanterafonseca
 
