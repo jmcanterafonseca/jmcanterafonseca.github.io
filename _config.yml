@@ -28,7 +28,7 @@ twitter_username: jmcantera
 github_username:  jmcanterafonseca
 
 # Build settings
-theme: jekyll-theme-minimal
+theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
