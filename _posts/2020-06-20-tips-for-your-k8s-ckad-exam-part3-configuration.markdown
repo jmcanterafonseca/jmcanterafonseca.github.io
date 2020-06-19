@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "CKAD Exam Tips Preparation 2/4 - Pods"
-date:   2020-06-19 08:00:00 +0200
-categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation pods
-feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
+title:  "CKAD Exam Tips Preparation 3/4 - Configuration and Volumes"
+date:   2020-06-20 08:00:00 +0200
+categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation configuration volumes
+feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/3"
 ---
 
 ## Introduction
@@ -20,7 +20,7 @@ composed by the following articles:
 
 * Part 1. [General Tips]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam %}).
 * Part 2. Pods and configuration. (This part)
-* Part 3. [Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %}).
+* Part 3. [Configuration and Volumes]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %}).
 * Part 4. Deployments, Services, Network Policies and Quotas.
 
 ## Pod Running Tips 
@@ -149,4 +149,4 @@ Hereby you will find some pod manifest examples highlighting different features 
 
 ## ⏭️ Next in this series
 
-[Configuration]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
+[Configuration]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part3-configuration %})

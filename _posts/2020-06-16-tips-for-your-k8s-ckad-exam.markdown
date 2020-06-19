@@ -12,22 +12,22 @@ This blog post series summarizes the study notes I have been taking during the p
 the [Certified Kubernetes Application Developer](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad) (CKAD) exam. 
 
 The CKAD is a certification offered by the [Cloud Native Computing Foundation](https://www.cncf.io/), a project hosted by the [Linux Foundation](https://www.linuxfoundation.org/).
-It is intended to assess your skills as an application developer able *to define application resources and use core primitives to build, monitor, and troubleshoot scalable applications and tools in Kubernetes (K8s)*. If you want to start learning K8s I would recommend this training course: [Introduction to Kubernetes](https://www.edx.org/es/course/introduction-to-kubernetes). 
-Mathew Palmer has developed a [course and a book](https://matthewpalmer.net/kubernetes-app-developer/) more targeted to preparing the CKAD.
+It is intended to assess your skills as an application developer able *to define application resources and use core primitives to build, monitor, and troubleshoot scalable applications and tools in Kubernetes (K8s)*. If you want to start learning K8s I would recommend this training course of the Linux Foundation: [Introduction to Kubernetes](https://www.edx.org/es/course/introduction-to-kubernetes). 
+Mathew Palmer has developed a [course and a book](https://matthewpalmer.net/kubernetes-app-developer/) specifically targeted to preparing the CKAD.
 
 In order to pass the exam it is fundamental not only to have a solid understanding of the main K8s primitives 
-but also to **be pretty fluent with the `kubectl` command line**. Therefore, it is very important to remember the more frequently used command line options and the main elements of the K8s object manifests (preferably in **YAML** format, as it is terser). You can found mock tasks somewhat similar to those found on the exam thanks to the work of
+but also to **be pretty fluent with the `kubectl` command line**. Therefore, it is very important to remember the more frequently used command line options and the main structure and elements of the K8s object manifests (preferably in **YAML** format, as it is terser). You can find mock tasks somewhat similar to those found on the exam thanks to the work of
 [Dimitris-Ilias Gkanatsios](https://github.com/dgkanatsios/CKAD-exercises).
 
 ## The Series
 
-During these blog series I summarize the main "study hooks" in order to be successful in your exam, as I was. The series is
+During this blog series I summarize the main "study hooks" in order to be successful with your exam, as I was. The series is
 composed by the following articles:
 
 * Part 1. General Tips. (This part)
-* Part 2. Pods and configuration.
-* Part 3. Service and Deployments.
-* Part 4. Volumes, Network Policies.
+* Part 2. [Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %}).
+* Part 3. [Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %}).
+* Part 4. Deployments, Services, Network Policies and Quotas.
 
 ## Documentation Tips 
 
@@ -95,7 +95,7 @@ To view your configuration:
 kubectl config view
 {% endhighlight %}
 
-Remember that: 
+{% include remember.markdown content="the structure of configurations and contexts" %} 
 
 {% highlight shell %}
 Config = { Users, Clusters, Contexts, Current-Context }
@@ -127,7 +127,7 @@ kubectl -A
 kubectl --all-namespaces
 {% endhighlight %}
 
-**Remember:** *A namespace can also be defined at the `metadata` level of an object manifest*.
+{% include remember.markdown content="A namespace can also be defined at the `metadata` level of an object manifest." %}
 
 ## Generic Operations
 
@@ -143,7 +143,7 @@ Apply an object manifest
 kubectl apply -f <manifest.yaml>
 {% endhighlight %}
 
-**Remember:** *Some objects do not admit overriding certain fields.*
+{% include remember.markdown content="Some objects do not admit overriding certain fields." %}
 
 Delete an object
 
@@ -160,9 +160,9 @@ kubectl get pods/mypod -o=yaml
 kubectl describe -f <manifest.yaml>
 {% endhighlight %}
 
-**Remember:** A `get` command does not display labels by default. `--show-labels` will do the trick. 
+{% include remember.markdown content="A `get` command does not display labels by default. `--show-labels` will do the trick." %}
 
-**Remember:** The  `-w` option allows to watch what is happening with a certain object. 
+{% include remember.markdown content="The  `-w` option allows to watch what is happening with a certain object." %}
 
 Use JSON Path to filter fields of an object descriptor (manifest)
 
@@ -182,7 +182,7 @@ Remove labels from a set of objects (Appending a dash to the label name i.e. `<l
 kubectl label pods --selector='app=v1' app-
 {% endhighlight %}
 
-**Remember:** `--selector` or `-l` is intended to select the concerned objects by matching labels. 
+{% include remember.markdown content="`--selector` or `-l` is intended to select the concerned objects by matching labels." %}
 
 Several objects can be referenced in any operation, for instance
 
@@ -190,6 +190,6 @@ Several objects can be referenced in any operation, for instance
 kubectl annotate pods nginx1 nginx2 nginx3 'description=a description'
 {% endhighlight %}
 
-## Feedback
-Have you enjoyed this article? Have you found it useful? 
-Leave me you feedback [here]({{ page.feedback}}) (A Github account is needed)
+## ⏭️ Next in this series2
+
+[Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %})
