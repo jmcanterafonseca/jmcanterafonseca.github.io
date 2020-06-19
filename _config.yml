@@ -20,15 +20,19 @@
 
 title: canterafonseca.eu
 description: >- # this means to ignore newlines until "baseurl:"
-  A technical blog expressing my own views on ICT technologies, including but not limited to 
-  Software Engineering, Cloud Native Computing, IoT for Smart Cities and Open Linked Data.
+  A technical blog expressing my own views on software and ICT, including but not limited to 
+  Software Engineering, Cloud Native Computing, Open Linked Data, IoT and DLTs.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://canterafonseca.eu" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jmcantera
 github_username:  jmcanterafonseca
+linkedin_username: jmcanterafonseca
+
+google_analytics: "UA-83719923-4"
 
 # Build settings
 theme: minima
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap

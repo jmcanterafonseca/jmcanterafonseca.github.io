@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "CKAD Exam Tips Preparation 1/4"
+title:  "CKAD Exam Tips Preparation 1/4 - Overview"
 date:   2020-06-16 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation
-feedback: "https://docs.google.com/forms/d/e/1FAIpQLSc6wUtP7uzMhf_gCZgWwxtrl3dgZCyd1qVaJa71Nib0U9fHJA/viewform?usp=pp_url&entry.276315985=CKAD+Exam+Notes&entry.486182672=Yes"
+feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
 ---
 
-If you like this blog article please [don't forget to like it here]({{ page.feedback}})
+## Introduction
 
 This blog post series summarizes the study notes I have been taking during the preparation of 
 the [Certified Kubernetes Application Developer](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad) (CKAD) exam. 
@@ -19,7 +19,15 @@ In order to pass the exam it is fundamental not only to have a solid understandi
 but also to **be pretty fluent with the `kubectl` command line**. Therefore, it is very important to remember the more frequently used command line options and the main elements of the K8s object manifests (preferably in **YAML** format, as it is terser). You can found mock tasks somewhat similar to those found on the exam thanks to the work of
 [Dimitris-Ilias Gkanatsios](https://github.com/dgkanatsios/CKAD-exercises).
 
-During these blog series I summarize the main "study hooks" in order to be successful in your exam, as I was. 
+## The Series
+
+During these blog series I summarize the main "study hooks" in order to be successful in your exam, as I was. The series is
+composed by the following articles:
+
+* Part 1. General Tips. (This part)
+* Part 2. Pods and configuration.
+* Part 3. Service and Deployments.
+* Part 4. Volumes, Network Policies.
 
 ## Documentation Tips 
 
@@ -51,6 +59,31 @@ kubectl --help
 kubectl create --help
 kubectl create deployment --help
 {% endhighlight %}
+
+## Environment set up tips
+If you are going to use `nano` as editor you must configure it properly in order to deal with YAML edition. Edit a file named `$HOME/.nanorc`
+
+{% highlight shell %}
+set tabsize 4
+set tabstospaces
+{% endhighlight %}
+
+You may also need (actually I did not use it) to use a term multiplexing solution such as `tmux`.
+
+{% highlight shell %}
+apt-get install tmux
+{% endhighlight %}
+
+With `tmux` you can 
+
+* Ctrl + b + “ → Split horizontally and create a new horizontal pane
+* Ctrl + b + cursor up / cursor down → Move between panes
+* Ctrl + b + x → Kill pane
+
+More information on how to use `tmux` can be found at
+
+* [http://www.sromero.org/wiki/linux/aplicaciones/tmux](http://www.sromero.org/wiki/linux/aplicaciones/tmux)
+* [https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e](https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e)
 
 ## Configuration and Namespaces Tips
 Your exam is going to be conducted (from a base node) in different K8s clusters and namespaces. 
@@ -101,7 +134,7 @@ kubectl --all-namespaces
 Create an object
 
 {% highlight shell %}
-kubectl apply -f <manifest.yaml>
+kubectl create -f <manifest.yaml>
 {% endhighlight %}
 
 Apply an object manifest
@@ -119,7 +152,7 @@ kubectl delete -f <manifest.yaml>
 kubectl delete pods/mypod --grace-period=1
 {% endhighlight %}
 
-Get information about an object
+Get information about an object. `describe` provides long descriptions. 
 
 {% highlight shell %}
 kubectl get -f <manifest.yaml> -o=wide
@@ -127,30 +160,36 @@ kubectl get pods/mypod -o=yaml
 kubectl describe -f <manifest.yaml>
 {% endhighlight %}
 
+**Remember:** A `get` command does not display labels by default. `--show-labels` will do the trick. 
+
+**Remember:** The  `-w` option allows to watch what is happening with a certain object. 
+
 Use JSON Path to filter fields of an object descriptor (manifest)
 
 {% highlight shell %}
 kubectl get pod nginx -o jsonpath='{.metadata.annotations}{"\n"}'
 {% endhighlight %}
 
-To re-label an object
+To re-label an object (`--overwrite` has to be used if we are updating an existing label)
 
 {% highlight shell %}
-kubectl label pods foo ‘status=unhealthy’ --overwrite
+kubectl label pods foo 'status=unhealthy' --overwrite
 {% endhighlight %}
 
-Remove labels from a set of objects (Using the notation <label>-)
+Remove labels from a set of objects (Appending a dash to the label name i.e. `<label>-`)
 
 {% highlight shell %}
-kubectl label pods --selector=’app=v1’ app-
+kubectl label pods --selector='app=v1' app-
 {% endhighlight %}
 
-Annotate several objects
+**Remember:** `--selector` or `-l` is intended to select the concerned objects by matching labels. 
+
+Several objects can be referenced in any operation, for instance
 
 {% highlight shell %}
-kubectl annotate pods nginx1 nginx2 nginx3 ‘description=a description’ 
+kubectl annotate pods nginx1 nginx2 nginx3 'description=a description'
 {% endhighlight %}
 
 ## Feedback
 Have you enjoyed this article? Have you found it useful? 
-Tell me you feedback [here]({{ page.feedback}})
+Leave me you feedback [here]({{ page.feedback}}) (A Github account is needed)

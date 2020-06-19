@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: jmcf 
+  labels:
+   run: my-pod
+  name: my-pod
+spec:
+ containers:
+ - image: busybox
+   name: my-pod
+   resources: {}
+   command: ["sh", "-c"]
+   args: ["sleep 3600"]
+ dnsPolicy: ClusterFirst
+ restartPolicy: Always
+status: {}

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ labels:
+   run: my-pod
+ name: my-pod
+ namespace: jmcf
+spec:
+ containers:
+ - image: nginx
+   ports:
+     - name: p1
+       containerPort: 80
+   name: my-pod
+   resources: {}
+   livenessProbe:
+     initialDelaySeconds: 3
+     httpGet:
+       port: "p1"
+       path: "/"
+ dnsPolicy: ClusterFirst
+ restartPolicy: Always
+status: {}
