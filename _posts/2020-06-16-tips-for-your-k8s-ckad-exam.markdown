@@ -95,11 +95,17 @@ To view your configuration:
 kubectl config view
 {% endhighlight %}
 
+{% highlight yaml %}
+{% include examples/config.yaml %}
+{% endhighlight %}
+
 {% include remember.markdown content="the structure of configurations and contexts" %} 
 
 {% highlight shell %}
 Config = { Users, Clusters, Contexts, Current-Context }
 Context = (Cluster, User, Namespace)
+Cluster = (K8s API-Server endpoint)
+User = (Key, Certificate)
 {% endhighlight %}
 
 If you want to set up a new context with a particular user, cluster and namespace:
@@ -190,6 +196,6 @@ Several objects can be referenced in any operation, for instance
 kubectl annotate pods nginx1 nginx2 nginx3 'description=a description'
 {% endhighlight %}
 
-## ⏭️ Next in this series2
+## ⏭️ Next in this series
 
 [Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %})

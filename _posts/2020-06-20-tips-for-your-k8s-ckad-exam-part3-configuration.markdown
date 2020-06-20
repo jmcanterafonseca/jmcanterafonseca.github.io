@@ -19,8 +19,8 @@ During these blog series I summarize the main "study hooks" in order to be succe
 composed by the following articles:
 
 * Part 1. [General Tips]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam %}).
-* Part 2. Pods and configuration. (This part)
-* Part 3. [Configuration and Volumes]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %}).
+* Part 2. [Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %})
+* Part 3. Configuration and Volumes (This part).
 * Part 4. Deployments, Services, Network Policies and Quotas.
 
 ## Pod Running Tips 
@@ -149,4 +149,4 @@ Hereby you will find some pod manifest examples highlighting different features 
 
 ## ⏭️ Next in this series
 
-[Configuration]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part3-configuration %})
+[Configuration]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
