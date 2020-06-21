@@ -6,6 +6,8 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
 ---
 
+# {{page.title}}
+
 ## Introduction
 
 This blog post series summarizes the study notes I have been taking during the preparation of 
