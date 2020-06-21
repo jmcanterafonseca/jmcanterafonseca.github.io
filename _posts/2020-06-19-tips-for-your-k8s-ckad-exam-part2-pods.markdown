@@ -6,24 +6,7 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
 ---
 
-# {{page.title}}
-
-## Introduction
-
-This blog post series summarizes the study notes I have been taking during the preparation of 
-the [Certified Kubernetes Application Developer](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad) (CKAD) exam. 
-
-If you want to know more about this series please visit [part 1]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam %}) of this series. 
-
-### The Series
-
-During these blog series I summarize the main "study hooks" in order to be successful in your exam, as I was. The series is
-composed by the following articles:
-
-* Part 1. [General Tips]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam %}).
-* Part 2. Pods and configuration. (This part)
-* Part 3. [Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %}).
-* Part 4. Deployments, Services, Network Policies and Quotas.
+{% include series.markdown %}
 
 ## Pod Running Tips 
 
