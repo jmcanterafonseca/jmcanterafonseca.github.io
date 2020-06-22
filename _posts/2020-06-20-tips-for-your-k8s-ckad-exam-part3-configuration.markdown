@@ -155,6 +155,17 @@ instead of `secretKeyRef`." %}
 
 ### As volumes
 
+A volume can be easily declared to reference a Config Map or a Secret. 
+Then, such volume can be mounted to a folder by containers. Such folder will contain a file per name/value pair. 
+The name of the file will correspond to the key name and the content of the file will be the key value. 
+
+{% highlight yaml %}
+{% include examples/configmap-volume.yaml %}
+{% endhighlight %}
+
+{% include remember.markdown content="The same can be done with Secret using `secret` 
+instead of `configMap`." %}
+
 ## Volumes
 
 
