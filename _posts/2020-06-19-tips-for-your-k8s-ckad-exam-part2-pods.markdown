@@ -1,12 +1,12 @@
 ---
-layout: post
+layout: post-with-toc
 title:  "CKAD Exam Tips Preparation 2/4 - Pods"
 date:   2020-06-19 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation pods
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
 ---
 
-{% include series.markdown %}
+{% include K8s/series.markdown %}
 
 ## Pod Running Tips 
 
@@ -135,3 +135,5 @@ Hereby you will find some pod manifest examples highlighting different features 
 ## ⏭️ Next in this series
 
 [Configuration]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
+
+{% include feedback.markdown %}

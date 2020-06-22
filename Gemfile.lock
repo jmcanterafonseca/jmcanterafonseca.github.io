@@ -246,7 +246,6 @@ DEPENDENCIES
   jekyll-feed (~> 0.12)
   jekyll-seo-tag (~> 2.6.1)
   jekyll-sitemap (~> 1.4.0)
-  kramdown (~> 1.17.0)
   minima (~> 2.5.1)
 
 BUNDLED WITH

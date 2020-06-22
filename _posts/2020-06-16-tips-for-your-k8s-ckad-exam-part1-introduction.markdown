@@ -1,14 +1,12 @@
 ---
-layout: post
-title:  "CKAD Exam Tips Preparation 1/4 - Overview"
+layout: post-with-toc
+title:  "CKAD Exam Tips Preparation 1/4 - Introduction"
 date:   2020-06-16 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
 ---
 
-{:toc}
-
-{% include series.markdown %}
+{% include K8s/series.markdown %}
 
 ## Documentation Tips 
 
@@ -84,9 +82,9 @@ kubectl config view
 
 {% highlight shell %}
 Config = { Users, Clusters, Contexts, Current-Context }
-Context = (Cluster, User, Namespace)
-Cluster = (K8s API-Server endpoint)
-User = (Key, Certificate)
+Context = ( Cluster, User, Namespace )
+Cluster = ( K8s-API-Server-endpoint )
+User = ( Key, Certificate )
 {% endhighlight %}
 
 If you want to set up a new context with a particular user, cluster and namespace:
@@ -180,3 +178,5 @@ kubectl annotate pods nginx1 nginx2 nginx3 'description=a description'
 ## ⏭️ Next in this series
 
 [Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %})
+
+{% include feedback.markdown %}

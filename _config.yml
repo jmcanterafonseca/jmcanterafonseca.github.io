@@ -58,6 +58,3 @@ exclude:
    - vendor/gems/
    - vendor/ruby/
 
-markdown: kramdown
-kramdown:
-  parse_block_html: true

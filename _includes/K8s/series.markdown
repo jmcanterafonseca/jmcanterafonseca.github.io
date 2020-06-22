@@ -11,12 +11,12 @@ In order to pass the exam it is fundamental not only to have a solid understandi
 but also to **be pretty fluent with the `kubectl` command line**. Therefore, it is very important to remember the more frequently used command line options and the main structure and elements of the K8s object manifests (preferably in **YAML** format, as it is terser). You can find mock tasks somewhat similar to those found on the exam thanks to the work of
 [Dimitris-Ilias Gkanatsios](https://github.com/dgkanatsios/CKAD-exercises).
 
-## About this Series
+### About this Series
 
 During this blog series I summarize the main "study hooks" in order to be successful with your exam, as I was. The series is
 composed by the following articles:
 
-* Part 1. [General Tips]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam-part1-general %})
+* Part 1. [General Tips]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam-part1-introduction %})
 * Part 2. [Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %}).
 * Part 3. [Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %}).
 * Part 4. Deployments, Services, Network Policies and Quotas.
