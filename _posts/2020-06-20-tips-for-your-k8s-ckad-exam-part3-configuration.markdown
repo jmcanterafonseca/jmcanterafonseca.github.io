@@ -2,137 +2,161 @@
 layout: post-with-toc
 title:  "CKAD Exam Tips Preparation 3/4 - Configuration and Volumes"
 date:   2020-06-20 08:00:00 +0200
-categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation configuration volumes
+categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation configuration volumes secrets
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/3"
 ---
 
-# {{page.title}}
-
 {% include K8s/series.markdown %}
 
-## Pod Running Tips 
+## Environment
 
-To general formula for **running** a K8s pod is:
-
-{% highlight shell %}
-kubectl run <POD_NAME> --image=<IMAGE> --port=<PORT> --labels=<LABELS> --env=<ENV> -- <COMMAND>
-{% endhighlight %}
-{% include remember.markdown content="The `<COMMAND>` has to be the literal command as you would type it on a command line. After the `--` only the command line shall appear" %} 
-
-{% include remember.markdown content="`<PORT>` is purely informative." %} 
-
-An example of the above is the following: 
+For running a pod with a certain set of environment variables (env var) the easiest way is with `--env`:
 
 {% highlight shell %}
-kubectl run b1 --image=busybox --port=3456 --labels='app=my-app' --env='var1=val1' -- sh -c 'sleep 3600'
+kubectl run p1 --image=busybox --env='var1=val1' --env='var2=val2' -- sh -c 'sleep 3600'
 {% endhighlight %}
 
-{% include remember.markdown content="`busybox` is one of your best allies when it comes to creating testing/dummy pods. Another option is `alpine`." %} 
+{% include remember.markdown content="one `--env` parameter is needed per env var set" %} 
 
-{% include remember.markdown content="A pod by default will always be restarted by K8s once it dies." %} 
+An environment can be also be populated with variables coming from ConfigMaps or Secrets. 
 
-We can easily **execute** a process inside the former pod, for instance we can check environment variables:
+## Config Maps
+
+The simplest way to create a Config Map is with the `--literal` command line option:
 
 {% highlight shell %}
-kubectl exec b1 -it -- env
+kubectl create configmap cm1 --from-literal='key1=value1' --from-literal='key2=value2'
 {% endhighlight %}
 
-Running a "casual, temporal Pod" inside the cluster is quite easy:
+{% include remember.markdown content="one `--literal` parameter is needed per name/value pair" %}
+
+A Config Map can also be created from a properties or environment var file:
 
 {% highlight shell %}
-kubectl run tmpod -it --image=busybox --restart=Never --rm=true -- sh
+cat file.env
+var1=val1
+var2=val2
+
+kubectl create configmap cm2 --from-env-file=file.env
 {% endhighlight %}
-
-{% include remember.markdown content="`-it` allows to attach your container to the local console." %} 
-
-{% include remember.markdown content="`run` is for running pods and `exec` is for executing commands on pods (or, more precisely, containers pertaining to pods)" %} 
-
-If you need to customize a Pod manifest you can start with a YAML boilerplate, edit it and finally apply it.
-The `--dry-run=client` and `-o=yaml` are the key options when it comes to creating a boilerplate, for instance:
 
 {% highlight shell %}
-kubectl run b2 --image=busybox --env='var1=val1' --dry-run=client -o=yaml -- sh -c 'sleep 3600' > b2.yaml
+kubectl describe configmap cm2
+
+Name:         cm2
+Namespace:    default
+
+Data
+====
+var1:
+----
+val1
+var2:
+----
+val2
 {% endhighlight %}
 
-will generate a `b2.yaml` file containing:
-
-{% highlight yaml %}
-{% include examples/b2.yaml %}
-{% endhighlight %}
-
-then you can edit the file `b2.yaml` adding the custom directives you may need and finally 
+A Config Map can also be created to include all the contents of a file:
 
 {% highlight shell %}
-kubectl apply -f b2.yaml
-{% endhighlight %} 
+cat myconfig.json
+{
+    "id": "a456",
+    "type": "Configuration"
+}
 
-To check the logs of a pod 
+kubectl create configmap cm3 --from-file=myconfig.json
+{% endhighlight %}
 
 {% highlight shell %}
-kubectl logs b2 
+Name:         cm3
+Namespace:    default
+
+Data
+====
+config.json:
+----
+{
+  "id": "a3456",
+  "type": "Configuration"
+}
 {% endhighlight %}
 
-{% include remember.markdown content="If a pod executes more than one container you can always select the target container with `-c <CONTAINER_NAME>`" %} 
+The above command will create a config map with just one name/value pair (named `myconfig.json`) which value will be the content 
+of the `myconfig.json` file. 
 
-{% include remember.markdown content="Use `--previous` to get logs of a previous execution. `-f` can be used to stream logs." %} 
+{% include remember.markdown content="The difference between `--from-env-file` and `--from-file`." %}
 
-## Pod manifest examples
+## Secrets 
 
-Hereby you will find some pod manifest examples highlighting different features related to pods. 
+{% include remember.markdown content="Use secrets for sensitive configurations, TLS, private keys, certificates, etc." %} 
 
-### Simple Pod
+{% include remember.markdown content="Secrets are stored encrypted but finally exposed to trusted containers in plain mode." %} 
+
+The simplest way to create a generic Secret is with the `--literal` command line option:
+
+{% highlight shell %}
+kubectl create secret generic s1 --from-literal='username=jmcf' --from-literal='pwd=a123456'
+{% endhighlight %}
+{% include remember.markdown content="one `--literal` parameter is needed per Secret's name/value pair." %}
+
+{% highlight shell %}
+kubectl describe secrets s1
+
+Name:         s1
+Namespace:    default
+
+Type:  Opaque
+
+Data
+====
+pwd:       7 bytes
+username:  4 bytes
+{% endhighlight %}
+
+Assuming your K8s implementation encrypts secrets using base64 (please do not do that in production) you can obtain
+a Secret's value in plain mode as follows:
+
+{% highlight shell %}
+kubectl get secret s1 -o jsonpath='{.data.username}{"\n"}' | base64 -d
+{% endhighlight %}
+
+{% include remember.markdown content="You can create Secrets from env files and with file or folder content." %}
+
+{% include remember.markdown content="Service Account tokens are also stored as Secrets 
+of type `kubernetes.io/service-account-token`." %}
+
+## Using Config Maps and Secrets with Pods
+
+### As env vars
+
+How to use a Config Map with direct mapping to env variables:
 
 {% highlight yaml %}
-{% include examples/simple-pod.yaml %}
+{% include examples/configmap-env.yaml %}
 {% endhighlight %}
 
-### Pod with a custom service account
+{% include remember.markdown content="An env var will be created for each ConfigMap's name/value pair." %}
 
-{% include remember.markdown content="A service account allows service within a namespace to call the K8s API Server." %} 
+{% include remember.markdown content="The same can be done with Secrets using `secretRef` instead of `configMapRef`." %}
+
+{% include remember.markdown content="Use `optional: false` to ensure you are using an already 
+existent/right Config Map or Secret." %}
+
+ConfigMap's or Secret's name/value pairs can also be mapped to custom env vars. In the example below the 
+env var `SECRET567` is mapped to the name/value pair `pwd` of the Secret `s1`. 
 
 {% highlight yaml %}
-{% include examples/pod-sa.yaml %}
+{% include examples/secret-env-var.yaml %}
 {% endhighlight %}
 
-### Pod with liveness probe
+{% include remember.markdown content="The same can be done with Config Map using `configMapKeyRef` 
+instead of `secretKeyRef`." %}
 
-{% include remember.markdown content="There are thresholds to consider the process as dead." %} 
+### As volumes
 
-{% highlight yaml %}
-{% include examples/pod-liveness.yaml %}
-{% endhighlight %}
+## Volumes
 
-### Pod with readiness probe
-
-{% include remember.markdown content="There are thresholds to consider the process as ready." %} 
-
-{% highlight yaml %}
-{% include examples/pod-readiness.yaml %}
-{% endhighlight %}
-
-### Pod with security context
-
-{% include remember.markdown content="A security context allows to set up a UID and GID under which the container process will execute." %} 
-
-{% highlight yaml %}
-{% include examples/pod-security-context.yaml %}
-{% endhighlight %}
-
-### Pod with resource declaration
-
-{% include remember.markdown content="If a namespace defines quotas then resource declaration is mandatory." %}
-
-{% highlight yaml %}
-{% include examples/pod-resources.yaml %}
-{% endhighlight %}
-
-### Pod with main and sidecar containers
-
-{% include remember.markdown content="There are other multi-container patterns such as ambassador or adapter." %}
-
-{% highlight yaml %}
-{% include examples/pod-sidecar.yaml %}
-{% endhighlight %}
 
 ## ⏭️ Next in this series
 
