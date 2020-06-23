@@ -12,7 +12,6 @@ spec:
      - name: p1
        containerPort: 80
    name: my-pod
-   resources: {}
    readinessProbe:
      initialDelaySeconds: 3
      httpGet:

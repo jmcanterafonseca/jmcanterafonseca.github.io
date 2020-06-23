@@ -139,27 +139,63 @@ Create a Job
 kubectl create job j1 --image=alpine --restart=OnFailure -- date
 {% endhighlight %}
 
-Create a Cron Job scheduled once per minute
-kubectl create cronjob cj1 --image=alpine --schedule="*/1 * * * *" --restart=OnFailure  -- date
+List Jobs
+{% highlight shell %}
+kubectl get jobs
+{% endhighlight %}
 
-A Job which defines parallelism and completion deadlines:
+A Job YAML manifest
 
 {% highlight yaml %}
 {% include examples/job.yaml %}
 {% endhighlight %}
 
-A Cron Job 
+{% include remember.markdown content="Parallelism and deadlines allow to have finer control of Job execution." %}
+
+{% include remember.markdown content="The Pod used to incarnate your Job will remain unless you set `ttlSecondsAfterFinished`." %} 
+
+{% include remember.markdown content="Jobs are based on a templated Pod." %}
+
+Create a Cron Job scheduled once per minute
+{% highlight shell %}
+kubectl create cronjob cj1 --image=alpine --schedule="*/1 * * * *" --restart=OnFailure  -- date
+{% endhighlight %}
+
+{% include remember.markdown content="A Cron Job schedule is in Cron format, see [https://en.wikipedia.org/wiki/Cron](https://en.wikipedia.org/wiki/Cron)." %}
+
+List Cron Jobs
+{% highlight shell %}
+kubectl get cronjobs
+{% endhighlight %}
+
+A Cron Job YAML manifest
 
 {% highlight yaml %}
 {% include examples/cronjob.yaml %}
 {% endhighlight %}
 
-{% include remember.markdown content="Jobs are based on a templated Pod" %}
+{% include remember.markdown content="Cron Jobs are based on a templated Job." %}
 
-{% include remember.markdown content="Parallelism and deadlines allow to have finer control of a Job" %}
+You can list the Pods launched to execute your (Cron) Job:
+
+{% highlight shell %}
+kubectl get pods -n jmcf --show-labels --selector='app=my-cjob'
+{% endhighlight %}
+
+{% highlight shell %}
+NAME                       READY   STATUS              RESTARTS   AGE    LABELS
+my-cjob-1592928720-rgvsd   0/1     Completed           0          3m3s   app=my-cjob,job-name=my-cjob-1592928720
+{% endhighlight %}
+
+{% include remember.markdown content="For Cron Jobs there is a limit in the number of Pods kept in history as per the `successfulJobsHistoryLimit` parameter." %}
+
+You can inspect logs of a (Cron) Job by showing logs of an associated Pod
+{% highlight shell %}
+kubectl logs -n jmcf my-cjob-1592928720-rgvsd
+{% endhighlight %}
 
 ## ⏭️ Next in this series
 
-[Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
+[Configuration and Volumes]({% post_url 2020-06-20-preparation-for-your-k8s-ckad-exam-part3-configuration %})
 
 {% include feedback.markdown %}

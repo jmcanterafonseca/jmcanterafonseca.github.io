@@ -10,6 +10,8 @@ spec:
    spec:
      template:
        metadata:
+         labels:
+          app: my-cjob
        spec:
          containers:
          - image: busybox

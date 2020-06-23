@@ -10,7 +10,6 @@ spec:
  containers:
  - image: busybox
    name: my-pod
-   resources: {}
    command: ["sh", "-c"]
    args: ["sleep 3600"]
  dnsPolicy: ClusterFirst

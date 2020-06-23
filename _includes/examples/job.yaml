@@ -16,5 +16,5 @@ spec:
        command: ["sh", "-c"]
        args: ["date"]
        resources: {}
-     restartPolicy: Never
+     restartPolicy: OnFailure
 status: {}

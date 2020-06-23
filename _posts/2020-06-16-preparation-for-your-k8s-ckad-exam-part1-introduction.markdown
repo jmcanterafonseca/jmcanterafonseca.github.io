@@ -8,7 +8,7 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## 🧭 Environment
+## 🧭 Environment Setup
 
 ### Documentation 
 
@@ -179,6 +179,6 @@ kubectl annotate pods nginx1 nginx2 nginx3 'description=a description'
 
 ## ⏭️ Next in this series
 
-[Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %})
+[Pods and Jobs]({% post_url 2020-06-19-preparation-for-your-k8s-ckad-exam-part2-pods %})
 
 {% include feedback.markdown %}

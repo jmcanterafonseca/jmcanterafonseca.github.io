@@ -1,6 +1,6 @@
 ---
 layout: post-with-toc
-title:  "CKAD Exam Tips Preparation 3/4 - Configuration and Volumes"
+title:  "CKAD Exam Preparation 3/4 - Configuration and Volumes"
 date:   2020-06-20 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation configuration volumes secrets
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/3"
@@ -8,7 +8,7 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## Configuration
+## 🧱 Configuration Primitives
 
 ### Environment
 
@@ -176,7 +176,7 @@ It is also possible to map specific name/value pairs of a Secret or Config Map t
 kubectl exec my-pod-4 -it -n jmcf -- cat /etc/foo/credentials/username.conf
 {% endhighlight %}
 
-## Volumes
+## 💽 Volumes
 
 ### PersistentVolumes 
 
@@ -193,6 +193,6 @@ How to
 
 ## ⏭️ Next in this series
 
-[Configuration]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
+[Deployments]({% post_url 2020-06-20-preparation-for-your-k8s-ckad-exam-part3-configuration %})
 
 {% include feedback.markdown %}

@@ -11,7 +11,6 @@ spec:
    name: my-pod
    command: ["sh", "-c"]
    args: ["while true; do echo \"hello!\"; sleep 5; done"]
-   resources: {}
    securityContext:
      runAsUser:  101
      runAsGroup: 101
