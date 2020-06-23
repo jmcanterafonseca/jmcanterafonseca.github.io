@@ -8,7 +8,9 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## Environment
+## Configuration
+
+### Environment
 
 For running a pod with a certain set of environment variables (env var) the easiest way is with `--env`:
 
@@ -20,7 +22,7 @@ kubectl run p1 --image=busybox --env='var1=val1' --env='var2=val2' -- sh -c 'sle
 
 An environment can be also be populated with variables coming from ConfigMaps or Secrets. 
 
-## Config Maps
+### Config Maps
 
 The simplest way to create a Config Map is with the `--literal` command line option:
 
@@ -87,7 +89,7 @@ of the `myconfig.json` file.
 
 {% include remember.markdown content="The difference between `--from-env-file` and `--from-file`." %}
 
-## Secrets 
+### Secrets 
 
 {% include remember.markdown content="Use secrets for sensitive configurations, TLS, private keys, certificates, etc." %} 
 
@@ -126,9 +128,7 @@ kubectl get secret s1 -o jsonpath='{.data.username}{"\n"}' | base64 -d
 {% include remember.markdown content="Service Account tokens are also stored as Secrets 
 of type `kubernetes.io/service-account-token`." %}
 
-## Using Config Maps and Secrets with Pods
-
-### As env vars
+### Pod Configuration through env vars
 
 How to use a Config Map with direct mapping to env variables:
 
@@ -153,7 +153,7 @@ env var `SECRET567` is mapped to the name/value pair `pwd` of the Secret `s1`.
 {% include remember.markdown content="The same can be done with Config Map using `configMapKeyRef` 
 instead of `secretKeyRef`." %}
 
-### As volumes
+### Pod configuration through Volumes
 
 A volume can be easily declared to reference a Config Map or a Secret. 
 Then, such volume can be mounted to a folder by containers. Such folder will contain a file per name/value pair. 
@@ -166,7 +166,29 @@ The name of the file will correspond to the key name and the content of the file
 {% include remember.markdown content="The same can be done with Secret using `secret` 
 instead of `configMap`." %}
 
+It is also possible to map specific name/value pairs of a Secret or Config Map to a path. See below
+
+{% highlight yaml %}
+{% include examples/secret-volume-item.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl exec my-pod-4 -it -n jmcf -- cat /etc/foo/credentials/username.conf
+{% endhighlight %}
+
 ## Volumes
+
+### PersistentVolumes 
+
+How to create a persistent volume 
+
+### PersistentVolumeClaims
+
+### Declaring and mounting Pod Volumes
+
+### Transient Volumes
+
+How to 
 
 
 ## ⏭️ Next in this series

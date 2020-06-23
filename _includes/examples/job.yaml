@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+ name: my-job
+ namespace: jmcf
+spec:
+ parallelism: 2
+ completions: 4
+ activeDeadlineSeconds: 15
+ template:
+   metadata:
+   spec:
+     containers:
+     - image: busybox
+       name: my-job
+       command: ["sh", "-c"]
+       args: ["date"]
+       resources: {}
+     restartPolicy: Never
+status: {}

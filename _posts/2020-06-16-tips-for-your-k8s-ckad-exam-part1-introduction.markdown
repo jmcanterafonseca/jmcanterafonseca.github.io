@@ -1,6 +1,6 @@
 ---
 layout: post-with-toc
-title:  "CKAD Exam Tips Preparation 1/4 - Introduction"
+title:  "CKAD Exam Preparation 1/4 - Cross Cutting Aspects"
 date:   2020-06-16 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
@@ -8,7 +8,9 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## Documentation Tips 
+## 🧭 Environment
+
+### Documentation 
 
 During the exam you will be allowed to open **only one browser tab** pointing to the K8s documentation Web site. 
 The main links to remember are below, namely the concepts one, as it will allow you to copy and paste certain
@@ -39,7 +41,7 @@ kubectl create --help
 kubectl create deployment --help
 {% endhighlight %}
 
-## Environment set up tips
+### Complementary Tools
 If you are going to use `nano` as editor you must configure it properly in order to deal with YAML edition. Edit a file named `$HOME/.nanorc`
 
 {% highlight shell %}
@@ -64,7 +66,7 @@ More information on how to use `tmux` can be found at
 * [http://www.sromero.org/wiki/linux/aplicaciones/tmux](http://www.sromero.org/wiki/linux/aplicaciones/tmux)
 * [https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e](https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e)
 
-## Configuration and Namespaces Tips
+### Configuration and Namespaces
 Your exam is going to be conducted (from a base node) in different K8s clusters and namespaces. 
 `kubectl` allows you to work against different clusters provided you have set the proper configuration context. 
 
@@ -84,7 +86,7 @@ kubectl config view
 Config = { Users, Clusters, Contexts, Current-Context }
 Context = ( Cluster, User, Namespace )
 Cluster = ( K8s-API-Server-endpoint )
-User = ( Key, Certificate )
+User = ( Private Key, Certificate )
 {% endhighlight %}
 
 If you want to set up a new context with a particular user, cluster and namespace:
@@ -114,7 +116,7 @@ kubectl --all-namespaces
 
 {% include remember.markdown content="A namespace can also be defined at the `metadata` level of an object manifest." %}
 
-## Generic Operations
+## ✂️ Generic Operations
 
 Create an object
 

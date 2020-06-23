@@ -1,6 +1,6 @@
 ---
 layout: post-with-toc
-title:  "CKAD Exam Tips Preparation 2/4 - Pods"
+title:  "CKAD Exam Preparation 2/4 - Pods and Jobs"
 date:   2020-06-19 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation pods
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
@@ -8,7 +8,7 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## Pod Running Tips 
+## ⚙️ Running Pods 
 
 To general formula for **running** a K8s pod is:
 
@@ -74,7 +74,7 @@ kubectl logs b2
 
 {% include remember.markdown content="Use `--previous` to get logs of a previous execution. `-f` can be used to stream logs." %} 
 
-## Pod manifest examples
+## 🧰 Pod manifest examples
 
 Hereby you will find some pod manifest examples highlighting different features related to pods. 
 
@@ -132,8 +132,34 @@ Hereby you will find some pod manifest examples highlighting different features 
 {% include examples/pod-sidecar.yaml %}
 {% endhighlight %}
 
+## ⌨️ Jobs
+
+Create a Job
+{% highlight shell %}
+kubectl create job j1 --image=alpine --restart=OnFailure -- date
+{% endhighlight %}
+
+Create a Cron Job scheduled once per minute
+kubectl create cronjob cj1 --image=alpine --schedule="*/1 * * * *" --restart=OnFailure  -- date
+
+A Job which defines parallelism and completion deadlines:
+
+{% highlight yaml %}
+{% include examples/job.yaml %}
+{% endhighlight %}
+
+A Cron Job 
+
+{% highlight yaml %}
+{% include examples/cronjob.yaml %}
+{% endhighlight %}
+
+{% include remember.markdown content="Jobs are based on a templated Pod" %}
+
+{% include remember.markdown content="Parallelism and deadlines allow to have finer control of a Job" %}
+
 ## ⏭️ Next in this series
 
-[Configuration]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
+[Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %})
 
 {% include feedback.markdown %}

@@ -1,0 +1,21 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+ name: my-cjob
+ namespace: jmcf
+spec:
+ jobTemplate:
+   metadata:
+     name: my-cjob
+   spec:
+     template:
+       metadata:
+       spec:
+         containers:
+         - image: busybox
+           name: my-cjob
+           command: ["sh", "-c"]
+           args: ["date"]
+         restartPolicy: OnFailure
+ schedule: '*/1 * * * *'
+status: {}

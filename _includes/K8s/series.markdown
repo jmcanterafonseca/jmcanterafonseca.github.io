@@ -1,4 +1,4 @@
-## Introduction
+## ▶️ Introduction
 
 This blog post series summarizes the study notes I have been taking during the preparation of 
 the [Certified Kubernetes Application Developer](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad) (CKAD) exam. 
@@ -16,7 +16,7 @@ but also to **be pretty fluent with the `kubectl` command line**. Therefore, it 
 During this blog series I summarize the main "study hooks" in order to be successful with your exam, as I was. The series is
 composed by the following articles:
 
-* Part 1. [General Tips]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam-part1-introduction %})
-* Part 2. [Pods]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %}).
+* Part 1. [Cross-Cutting Aspects]({% post_url 2020-06-16-tips-for-your-k8s-ckad-exam-part1-introduction %})
+* Part 2. [Pods and Jobs]({% post_url 2020-06-19-tips-for-your-k8s-ckad-exam-part2-pods %}).
 * Part 3. [Configuration and Volumes]({% post_url 2020-06-20-tips-for-your-k8s-ckad-exam-part3-configuration %}).
 * Part 4. Deployments, Services, Network Policies and Quotas.
