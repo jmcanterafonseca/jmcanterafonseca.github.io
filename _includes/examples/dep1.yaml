@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ex1
+  name: ex1
+  namespace: jmcf
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ex1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ex1
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+

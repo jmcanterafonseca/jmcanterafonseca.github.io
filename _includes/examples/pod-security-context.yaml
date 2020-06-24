@@ -16,4 +16,4 @@ spec:
      runAsGroup: 101
  dnsPolicy: ClusterFirst
  restartPolicy: Always
-status: {}
+

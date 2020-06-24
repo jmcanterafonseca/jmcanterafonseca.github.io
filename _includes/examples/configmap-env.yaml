@@ -18,4 +18,4 @@ spec:
          optional: false
  dnsPolicy: ClusterFirst
  restartPolicy: Always
-status: {}
+

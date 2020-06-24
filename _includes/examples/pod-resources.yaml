@@ -21,4 +21,3 @@ spec:
        memory: 10Mi
  dnsPolicy: ClusterFirst
  restartPolicy: Always
-status: {}

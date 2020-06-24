@@ -22,4 +22,3 @@ spec:
        mountPath: "/etc/foo"
  dnsPolicy: ClusterFirst
  restartPolicy: Always
-status: {}

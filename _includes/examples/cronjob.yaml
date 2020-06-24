@@ -20,4 +20,3 @@ spec:
            args: ["date"]
          restartPolicy: OnFailure
  schedule: '*/1 * * * *'
-status: {}

@@ -19,4 +19,4 @@ composed by the following articles:
 * Part 1. [Cross-Cutting Aspects]({% post_url 2020-06-16-preparation-for-your-k8s-ckad-exam-part1-introduction %})
 * Part 2. [Pods and Jobs]({% post_url 2020-06-19-preparation-for-your-k8s-ckad-exam-part2-pods %}).
 * Part 3. [Configuration and Volumes]({% post_url 2020-06-20-preparation-for-your-k8s-ckad-exam-part3-configuration %}).
-* Part 4. Deployments, Services, Network Policies and Quotas.
+* Part 4. [Deployments and Services]({% post_url 2020-06-24-preparation-for-your-k8s-ckad-exam-part4-services %}).

@@ -14,4 +14,3 @@ spec:
    args: ["sleep 3600"]
  dnsPolicy: ClusterFirst
  restartPolicy: Always
-status: {}
