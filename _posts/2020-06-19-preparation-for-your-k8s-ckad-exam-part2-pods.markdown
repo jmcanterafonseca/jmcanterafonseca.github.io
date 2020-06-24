@@ -8,7 +8,9 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## ⚙️ Running Pods 
+## ⚙️ Running Pods
+
+{% include see-also.markdown content="https://kubernetes.io/docs/concepts/workloads/pods/" %}
 
 To general formula for **running** a K8s pod is:
 
@@ -133,6 +135,8 @@ Hereby you will find some pod manifest examples highlighting different features 
 {% endhighlight %}
 
 ## ⌨️ Jobs
+
+{% include see-also.markdown content="https://kubernetes.io/docs/tasks/job/" %}
 
 Create a Job
 {% highlight shell %}

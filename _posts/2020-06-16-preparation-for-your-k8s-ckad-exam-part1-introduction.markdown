@@ -10,6 +10,8 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 ## 🧭 Environment Setup
 
+{% include see-also.markdown content="https://kubernetes.io/docs/concepts/overview/components/" %}
+
 ### Documentation 
 
 During the exam you will be allowed to open **only one browser tab** pointing to the K8s documentation Web site. 
@@ -61,7 +63,7 @@ With `tmux` you can
 * Ctrl + b + cursor up / cursor down → Move between panes
 * Ctrl + b + x → Kill pane
 
-More information on how to use `tmux` can be found at
+More information on how to use `tmux` can be found at:
 
 * [http://www.sromero.org/wiki/linux/aplicaciones/tmux](http://www.sromero.org/wiki/linux/aplicaciones/tmux)
 * [https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e](https://medium.com/@jeongwhanchoi/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e)
