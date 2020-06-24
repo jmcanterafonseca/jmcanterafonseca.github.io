@@ -8,7 +8,7 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 {% include K8s/series.markdown %}
 
-## 🧱 Configuration Primitives
+## 🖇️ Configuration Primitives
 
 {% include see-also.markdown content="https://kubernetes.io/docs/concepts/configuration/" %}
 
@@ -263,6 +263,6 @@ kubectl exec -it -f pod-pvc.yaml -- cat /var/log/app.txt
 
 ## ⏭️ Next in this series
 
-[Deployments]({% post_url 2020-06-20-preparation-for-your-k8s-ckad-exam-part3-configuration %})
+[Deployments, Services and Networking]({% post_url 2020-06-24-preparation-for-your-k8s-ckad-exam-part4-services %})
 
 {% include feedback.markdown %}
