@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mypv-tutorial
+  labels:
+    release: stable
+spec:
+  storageClassName: canterafonseca
+  capacity:
+    storage: 20Mi
+  hostPath:
+    path: "/tmp/volume_test"
+  accessModes:
+    - ReadWriteOnce
+    - ReadWriteMany

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: pvclaim-t1
+ namespace: jmcf
+spec:
+ storageClassName: canterafonseca 
+ accessModes:
+   - ReadWriteOnce
+ volumeMode: Filesystem
+ resources:
+   requests:
+     storage: 10Mi
+ selector:
+   matchLabels:
+     release: stable

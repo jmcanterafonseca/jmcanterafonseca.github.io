@@ -10,6 +10,8 @@ feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues
 
 ## 🧱 Configuration Primitives
 
+{% include see-also.markdown content="https://kubernetes.io/docs/concepts/configuration/" %}
+
 ### Environment
 
 For running a pod with a certain set of environment variables (env var) the easiest way is with `--env`:
@@ -178,18 +180,86 @@ kubectl exec my-pod-4 -it -n jmcf -- cat /etc/foo/credentials/username.conf
 
 ## 💽 Volumes
 
-### PersistentVolumes 
-
-How to create a persistent volume 
-
-### PersistentVolumeClaims
-
-### Declaring and mounting Pod Volumes
+{% include see-also.markdown content="https://kubernetes.io/docs/concepts/storage/" %}
 
 ### Transient Volumes
 
-How to 
+`emptyDir` allows to create a transient Volume for a Pod.
 
+{% highlight yaml %}
+{% include examples/emptydir-volume.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl exec -it -f emptydir-volume.yaml -- cat /var/log/app.txt
+{% endhighlight %}
+
+{% include remember.markdown content="Transient Volumes share a Pod's lifetime." %}
+
+### Persistent Volumes 
+
+How to create a Persistent Volume (PV)
+
+{% highlight yaml %}
+{% include examples/pv.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl get pv mypv-tutorial
+{% endhighlight %}
+
+{% highlight shell %}
+NAME            CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS     REASON   AGE
+mypv-tutorial   20Mi       RWO,RWX        Retain           Available           canterafonseca            25s
+{% endhighlight %}
+
+{% include remember.markdown content="PVs are cluster resources and have a lifecycle independent of any individual Pod that uses the PV." %}
+
+{% include remember.markdown content="The reclaim policy for a PV tells the cluster what to do with the Volume after it has been released of its claim: `Retain`, `Recycle`, or `Delete`." %}
+
+### Persistent Volume Claims
+
+A Persistent Volume Claim (PVC) is a request for storage by a user. PVCs consume PV resources. Claims can request specific size and access modes.
+
+{% highlight yaml %}
+{% include examples/pvc.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl get pvc -n jmcf pvclaim-t1
+{% endhighlight %} 
+
+{% highlight shell %}
+NAME         STATUS   VOLUME          CAPACITY   ACCESS MODES   STORAGECLASS     AGE
+pvclaim-t1   Bound    mypv-tutorial   20Mi       RWO,RWX        canterafonseca   20s
+{% endhighlight %}
+
+We can observe that our initial PV `mypv-tutorial` it is now bound to our PVC `jmcf/pvclaim-t1`. 
+
+{% highlight shell %}
+kubectl get pv mypv-tutorial
+{% endhighlight %} 
+
+{% highlight shell %}
+NAME            CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS     REASON   AGE
+mypv-tutorial   20Mi       RWO,RWX        Retain           Bound    jmcf/pvclaim-t1   canterafonseca            17m
+{% endhighlight %}
+
+{% include remember.markdown content="The binding between a PV and a PVC happens provided there is a match with capacity,
+storage class and selector." %}
+
+{% include remember.markdown content="There are storage classes marked as dynamically provisioned. In those cases
+PVs can be created dynamically to meet the demands of a PVC." %}
+
+### Mounting Persistent Volume Claims
+
+{% highlight yaml %}
+{% include examples/pod-pvc.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl exec -it -f pod-pvc.yaml -- cat /var/log/app.txt
+{% endhighlight %}
 
 ## ⏭️ Next in this series
 
