@@ -138,6 +138,8 @@ kubectl delete hpa/ex1 -n jmcf
 
 ## 🧱 Services
 
+### Headless Service
+
 Create a headless (without Cluster IP) Service 
 {% highlight shell %}
 kubectl create service clusterip my-service --tcp=80:80 --clusterip="None" --dry-run=client -o=yaml > service.yaml
@@ -147,14 +149,14 @@ kubectl create service clusterip my-service --tcp=80:80 --clusterip="None" --dry
 {% include examples/service.yaml %}
 {% endhighlight %}
 
-{% include remember.markdown content="A headless Service shall not include any port mapping. The ports exposed are just Pod's containers ports" %}
+{% include remember.markdown content="The ports exposed under a headless Service are just Pod's containers ports" %}
 
 {% include remember.markdown content="A Service is assigned a DNS name, usually in the form `my-service.namespace.svc.cluster.local`" %}
 
 {% include remember.markdown content="A Service only groups Pods based on matching labels." %}
 
 {% highlight shell %}
-kubectl describe -f service.yaml
+kubectl describe service my-service -n jmcf
 {% endhighlight %}
 
 {% highlight shell %}
@@ -173,10 +175,12 @@ Events:            <none>
 
 Test that `my-service` has been configured properly:
 {% highlight shell %}
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service.jmcf
 kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service.jmcf.svc.cluster.local
 {% endhighlight %}
 
-{% include remember.markdown content="`http://my-service` and `http://my-service.jmcf` should work as well." %}
+### Cluster IP Service
 
 Create a Cluster IP Service
 
@@ -190,11 +194,73 @@ kubectl create service clusterip my-service --tcp=8080:80 --dry-run=client -o=ya
 
 {% include remember.markdown content="`targetPort` (the second element in the `--tcp` parameter) is the Pod's container port." %}
 
-Describe and test
+{% highlight shell %}
+kubectl describe service my-service-cip -n jmcf
+{% endhighlight %}
+
+{% highlight shell %}
+Name:              my-service-cip
+Namespace:         jmcf
+Labels:            app=ex1
+Annotations:       Selector:  app=ex1
+Type:              ClusterIP
+IP:                10.96.72.170
+Port:              8080-80  8080/TCP
+TargetPort:        80/TCP
+Endpoints:         172.17.0.47:80,172.17.0.48:80,172.17.0.49:80
+Session Affinity:  None
+Events:            <none>
+{% endhighlight %}
+
+Test that the Cluster IP has been assigned properly:
+{% highlight shell %}
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://10.96.72.170:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service-cip:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service-cip.jmcf:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service-cip.jmcf.svc.cluster.local:8080
+{% endhighlight %}
+
+### Node Port Service
 
 Create Node Port Service
 
+{% highlight shell %}
+kubectl create service nodeport my-service-np --tcp=8080:80 --dry-run=client -o=yaml > service-nodeport.yaml
+{% endhighlight %}
 
+{% highlight yaml %}
+{% include examples/service-nodeport.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl describe service my-service-np -n jmcf
+{% endhighlight %}
+
+{% highlight shell %}
+Name:                     my-service-np
+Namespace:                jmcf
+Labels:                   app=ex1
+Annotations:              Selector:  app=ex1
+Type:                     NodePort
+IP:                       10.106.215.220
+Port:                     8080-80  8080/TCP
+TargetPort:               80/TCP
+NodePort:                 8080-80  31460/TCP
+Endpoints:                172.17.0.47:80,172.17.0.48:80,172.17.0.49:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+{% endhighlight %}
+
+Test that the Node Port has been assigned properly:
+{% highlight shell %}
+wget -O - http://192.168.99.101:31460
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://10.106.215.220:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service-np:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service-np.jmcf:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://my-service-np.jmcf.svc.cluster.local:8080
+kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget -O - http://172.17.0.47
+{% endhighlight %}
 
 ## 🌐 Networking
 
