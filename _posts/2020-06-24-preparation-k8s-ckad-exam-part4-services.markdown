@@ -6,9 +6,13 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/4"
 ---
 
+## Introduction
+
+This part outlines the key networking aspects of the CKAD Exam Curriculum. To learn more about the CKAD exam please read this [overview]({% post_url 2020-06-25-preparation-k8s-ckad-exam-overview %}).
+
 {% include K8s/series.markdown %}
 
-## 🖥️ &nbsp;&nbsp;Deployments
+## 🖥️ Deployments
 
 {% include see-also.markdown content="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" %}
 

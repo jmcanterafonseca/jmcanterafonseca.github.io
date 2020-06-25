@@ -6,6 +6,10 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
 ---
 
+## Introduction
+
+This part is devoted to Pods and Jobs as key primitives of the CKAD Exam Curriculum. To learn more about the CKAD exam please read this [overview]({% post_url 2020-06-25-preparation-k8s-ckad-exam-overview %}).
+
 {% include K8s/series.markdown %}
 
 ## ⚙️ Running Pods
@@ -200,6 +204,6 @@ kubectl logs -n jmcf my-cjob-1592928720-rgvsd
 
 ## ⏭️ Next in this series
 
-[Configuration and Volumes]({% post_url 2020-06-20-preparation-for-your-k8s-ckad-exam-part3-configuration %})
+[Configuration and Volumes]({% post_url 2020-06-20-preparation-k8s-ckad-exam-part3-configuration %})
 
 {% include feedback.markdown %}

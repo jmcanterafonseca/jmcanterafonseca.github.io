@@ -6,6 +6,10 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/3"
 ---
 
+## Introduction
+
+This part summarizes Configuration and Volumes as key primitives of the CKAD Exam Curriculum. To learn more about the CKAD exam please read this [overview]({% post_url 2020-06-25-preparation-k8s-ckad-exam-overview %}).
+
 {% include K8s/series.markdown %}
 
 ## 🖇️ Configuration Primitives
@@ -263,6 +267,6 @@ kubectl exec -it -f pod-pvc.yaml -- cat /var/log/app.txt
 
 ## ⏭️ Next in this series
 
-[Deployments, Services and Networking]({% post_url 2020-06-24-preparation-for-your-k8s-ckad-exam-part4-services %})
+[Deployments, Services and Networking]({% post_url 2020-06-24-preparation-k8s-ckad-exam-part4-services %})
 
 {% include feedback.markdown %}

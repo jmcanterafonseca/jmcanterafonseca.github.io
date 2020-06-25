@@ -1,1 +1,1 @@
-💡 **Remember:** *{{include.content}}*
+💡 *{{include.content}}*

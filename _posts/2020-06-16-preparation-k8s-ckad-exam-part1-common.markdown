@@ -6,6 +6,10 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
 ---
 
+## Introduction
+
+This part covers cross-cutting aspects to be known in order to pass the CKAD Certification Exam. To learn more about the CKAD exam  please read this [overview]({% post_url 2020-06-25-preparation-k8s-ckad-exam-overview %}).
+
 {% include K8s/series.markdown %}
 
 ## 🧭 Environment Setup
@@ -181,6 +185,6 @@ kubectl annotate pods nginx1 nginx2 nginx3 'description=a description'
 
 ## ⏭️ Next in this series
 
-[Pods and Jobs]({% post_url 2020-06-19-preparation-for-your-k8s-ckad-exam-part2-pods %})
+[Pods and Jobs]({% post_url 2020-06-19-preparation-k8s-ckad-exam-part2-pods %})
 
 {% include feedback.markdown %}
