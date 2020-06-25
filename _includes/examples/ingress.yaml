@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: jmcf
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: ckad.example.org
+    http:
+      paths:
+      - path: /ex1
+        backend:
+          serviceName: my-service-cip
+          servicePort: 8080
