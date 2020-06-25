@@ -274,7 +274,7 @@ kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget 
 
 {% include remember.markdown content="Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster." %}
 
-{% include remember.markdown content="You must have an **ingress controller** to satisfy an Ingress. Only creating an Ingress resource has no effect." %}
+{% include remember.markdown content="You must have an **ingress controller** to satisfy an Ingress. Only creating an `Ingress` resource has no effect." %}
 
 An Ingress which enables reverse proxying to your Service from a canonical address:
 
@@ -294,6 +294,8 @@ curl http://ckad.example.org/ex1
 
 {% include see-also.markdown content="https://kubernetes.io/docs/concepts/services-networking/network-policies/" %}
 
+{% include remember.markdown content="To use network policies, you must be using a networking solution which supports NetworkPolicy. Creating a `NetworkPolicy` resource without a controller that implements it will have no effect." %}
+
 Define a Network Policy that allows to talk to, our previously defined, `ex1` Pods only from containers belonging to the `jmcf` Namespace which are labeled as `role=test`.
 
 {% highlight shell %}
@@ -307,7 +309,10 @@ kubectl label namespace jmcf 'project=ckad'
 {% endhighlight %}
 
 {% highlight shell %}
-kubectl describe NetworkPolicy -n jmcf
+kubectl describe NetworkPolicy test-network-policy -n jmcf
+{% endhighlight %}
+
+{% highlight shell %}
 Name:         test-network-policy
 Namespace:    jmcf
 Created on:   2020-06-25 14:03:55 +0200 CEST
@@ -331,6 +336,6 @@ Annotations:  Spec:
 {% include remember.markdown content="A Network Policy ingress or egress rules determines from or to which Pods and/or Namespaces
 traffic is allowed." %}
 
-{% include remember.markdown content="If you declare `Ingress` or `Egress` policy types (under `policyTypes`) and no rule is provided under that category then no traffic of such category will be allowed." %}
+{% include remember.markdown content="If you declare `Ingress` or `Egress` policy types (under `policyTypes`), and no rule is provided under that category then no traffic of such category will be allowed." %}
 
 {% include feedback.markdown %}
