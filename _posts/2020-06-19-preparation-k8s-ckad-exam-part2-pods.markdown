@@ -41,7 +41,7 @@ We can easily **execute** a process inside the former pod, for instance we can c
 kubectl exec b1 -it -- env
 {% endhighlight %}
 
-Running a "casual, temporal Pod" inside the cluster is quite easy:
+{% include task.html content="Running a casual, temporal Pod inside a cluster:" %}
 
 {% highlight shell %}
 kubectl run tmpod -it --image=busybox --restart=Never --rm=true -- sh
