@@ -6,9 +6,9 @@ categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/3"
 ---
 
-## Introduction
+## ▶️ Introduction
 
-This part summarizes Configuration and Volumes as key primitives of the CKAD Exam Curriculum. To learn more about the CKAD exam please read this [overview]({% post_url 2020-06-25-preparation-k8s-ckad-exam-overview %}).
+This part summarizes Configuration and Volumes as key primitives of the CKAD Exam Curriculum. To learn more about the CKAD Exam please read this [overview]({% post_url 2020-06-25-preparation-k8s-ckad-exam-overview %}).
 
 {% include K8s/series.markdown %}
 
@@ -18,27 +18,27 @@ This part summarizes Configuration and Volumes as key primitives of the CKAD Exa
 
 ### Environment
 
-For running a pod with a certain set of environment variables (env var) the easiest way is with `--env`:
+For **running a Pod** with a certain set of **environment variables** (env var) the easiest way is with `--env`:
 
 {% highlight shell %}
 kubectl run p1 --image=busybox --env='var1=val1' --env='var2=val2' -- sh -c 'sleep 3600'
 {% endhighlight %}
 
-{% include remember.markdown content="one `--env` parameter is needed per env var set" %} 
+{% include remember.markdown content="one `--env` parameter is needed per env var set." %} 
 
-An environment can be also be populated with variables coming from ConfigMaps or Secrets. 
+An environment can be also be populated with variables coming from Config Maps or Secrets. 
 
 ### Config Maps
 
-The simplest way to create a Config Map is with the `--literal` command line option:
+The simplest way to **create a Config Map** is with the `--literal` command line option:
 
 {% highlight shell %}
 kubectl create configmap cm1 --from-literal='key1=value1' --from-literal='key2=value2'
 {% endhighlight %}
 
-{% include remember.markdown content="one `--literal` parameter is needed per name/value pair" %}
+{% include remember.markdown content="one `--literal` parameter is needed per name/value pair." %}
 
-A Config Map can also be created from a properties or environment var file:
+A Config Map can also be created from a **properties or environment var file**:
 
 {% highlight shell %}
 cat file.env
@@ -64,7 +64,7 @@ var2:
 val2
 {% endhighlight %}
 
-A Config Map can also be created to include all the contents of a file:
+A Config Map can also be created to **include all the contents of a file**:
 
 {% highlight shell %}
 cat myconfig.json
@@ -90,18 +90,17 @@ config.json:
 }
 {% endhighlight %}
 
-The above command will create a config map with just one name/value pair (named `myconfig.json`) which value will be the content 
-of the `myconfig.json` file. 
+The above command will create a Config Map with just **one name/value pair** (named `myconfig.json`) which value will be **the content of the `myconfig.json` file**. 
 
 {% include remember.markdown content="The difference between `--from-env-file` and `--from-file`." %}
 
 ### Secrets 
 
-{% include remember.markdown content="Use secrets for sensitive configurations, TLS, private keys, certificates, etc." %} 
+{% include remember.markdown content="Use Secrets for sensitive configurations, TLS, private keys, certificates, etc." %} 
 
 {% include remember.markdown content="Secrets are stored encrypted but finally exposed to trusted containers in plain mode." %} 
 
-The simplest way to create a generic Secret is with the `--literal` command line option:
+The simplest way to create a **generic Secret** is with the `--literal` **command line** option:
 
 {% highlight shell %}
 kubectl create secret generic s1 --from-literal='username=jmcf' --from-literal='pwd=a123456'
@@ -122,8 +121,7 @@ pwd:       7 bytes
 username:  4 bytes
 {% endhighlight %}
 
-Assuming your K8s implementation encrypts secrets using base64 (please do not do that in production) you can obtain
-a Secret's value in plain mode as follows:
+Assuming your K8s implementation encrypts Secrets using base64 (please do not do that in production) you can **obtain a Secret's value in plain mode** as follows:
 
 {% highlight shell %}
 kubectl get secret s1 -o jsonpath='{.data.username}{"\n"}' | base64 -d
@@ -136,7 +134,7 @@ of type `kubernetes.io/service-account-token`." %}
 
 ### Pod Configuration through env vars
 
-How to use a Config Map with direct mapping to env variables:
+How to use a Config Map with **direct mapping to env variables**:
 
 {% highlight yaml %}
 {% include examples/configmap-env.yaml %}
@@ -149,7 +147,7 @@ How to use a Config Map with direct mapping to env variables:
 {% include remember.markdown content="Use `optional: false` to ensure you are using an already 
 existent/right Config Map or Secret." %}
 
-ConfigMap's or Secret's name/value pairs can also be mapped to custom env vars. In the example below the 
+ConfigMap's or Secret's **name/value pairs** can also be mapped to **custom env vars**. In the example below the 
 env var `SECRET567` is mapped to the name/value pair `pwd` of the Secret `s1`. 
 
 {% highlight yaml %}
@@ -161,9 +159,9 @@ instead of `secretKeyRef`." %}
 
 ### Pod configuration through Volumes
 
-A volume can be easily declared to reference a Config Map or a Secret. 
-Then, such volume can be mounted to a folder by containers. Such folder will contain a file per name/value pair. 
-The name of the file will correspond to the key name and the content of the file will be the key value. 
+A **Volume** can be easily declared to **reference a Config Map or a Secret**. 
+Then, such volume can be **mounted** to a folder by containers. Such folder will contain **a file per name/value pair**. 
+The **name** of the file will correspond to the **key name** and the **content** of the file will be the **key value**. 
 
 {% highlight yaml %}
 {% include examples/configmap-volume.yaml %}
@@ -172,7 +170,7 @@ The name of the file will correspond to the key name and the content of the file
 {% include remember.markdown content="The same can be done with Secret using `secret` 
 instead of `configMap`." %}
 
-It is also possible to map specific name/value pairs of a Secret or Config Map to a path. See below
+It is also possible to **map** specific name/value pairs of a Secret or Config Map to a **path**. See below
 
 {% highlight yaml %}
 {% include examples/secret-volume-item.yaml %}
@@ -188,7 +186,7 @@ kubectl exec my-pod-4 -it -n jmcf -- cat /etc/foo/credentials/username.conf
 
 ### Transient Volumes
 
-`emptyDir` allows to create a transient Volume for a Pod.
+`emptyDir` allows to create a **transient Volume** for a Pod.
 
 {% highlight yaml %}
 {% include examples/emptydir-volume.yaml %}
@@ -202,7 +200,7 @@ kubectl exec -it -f emptydir-volume.yaml -- cat /var/log/app.txt
 
 ### Persistent Volumes 
 
-How to create a Persistent Volume (PV)
+How to create a **Persistent Volume** (PV)
 
 {% highlight yaml %}
 {% include examples/pv.yaml %}
@@ -217,13 +215,13 @@ NAME            CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   S
 mypv-tutorial   20Mi       RWO,RWX        Retain           Available           canterafonseca            25s
 {% endhighlight %}
 
-{% include remember.markdown content="PVs are cluster resources and have a lifecycle independent of any individual Pod that uses the PV." %}
+{% include remember.markdown content="PVs are **cluster resources** and have a lifecycle independent of any individual Pod that uses the PV." %}
 
 {% include remember.markdown content="The reclaim policy for a PV tells the cluster what to do with the Volume after it has been released of its claim: `Retain`, `Recycle`, or `Delete`." %}
 
 ### Persistent Volume Claims
 
-A Persistent Volume Claim (PVC) is a request for storage by a user. PVCs consume PV resources. Claims can request specific size and access modes.
+A Persistent Volume Claim (PVC) is a **request for storage** by a user. **PVCs consume PV resources**. Claims can request specific size and access modes.
 
 {% highlight yaml %}
 {% include examples/pvc.yaml %}
@@ -238,7 +236,7 @@ NAME         STATUS   VOLUME          CAPACITY   ACCESS MODES   STORAGECLASS    
 pvclaim-t1   Bound    mypv-tutorial   20Mi       RWO,RWX        canterafonseca   20s
 {% endhighlight %}
 
-We can observe that our initial PV `mypv-tutorial` it is now bound to our PVC `jmcf/pvclaim-t1`. 
+We can observe that our initial PV `mypv-tutorial` it is now **bound** to our PVC `jmcf/pvclaim-t1`. 
 
 {% highlight shell %}
 kubectl get pv mypv-tutorial
@@ -249,10 +247,9 @@ NAME            CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM       
 mypv-tutorial   20Mi       RWO,RWX        Retain           Bound    jmcf/pvclaim-t1   canterafonseca            17m
 {% endhighlight %}
 
-{% include remember.markdown content="The binding between a PV and a PVC happens provided there is a match with capacity,
-storage class and selector." %}
+{% include remember.markdown content="The binding between a PV and a PVC happens provided there is a **match** with capacity, storage class and selector." %}
 
-{% include remember.markdown content="There are storage classes marked as dynamically provisioned. In those cases
+{% include remember.markdown content="There are storage classes marked as **dynamically provisioned**. In those cases
 PVs can be created dynamically to meet the demands of a PVC." %}
 
 ### Mounting Persistent Volume Claims
