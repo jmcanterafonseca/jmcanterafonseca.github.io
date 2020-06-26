@@ -62,7 +62,7 @@ kubectl run b2 --image=busybox --env='var1=val1' --dry-run=client -o=yaml -- sh 
 will generate a `b2.yaml` file containing:
 
 {% highlight yaml %}
-{% include examples/b2.yaml %}
+{% include K8s/examples/b2.yaml %}
 {% endhighlight %}
 
 then you can **edit** the file `b2.yaml` adding the **custom** directives you may need and finally 
@@ -88,7 +88,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 ### Simple Pod
 
 {% highlight yaml %}
-{% include examples/simple-pod.yaml %}
+{% include K8s/examples/simple-pod.yaml %}
 {% endhighlight %}
 
 ### Pod with a custom Service Account
@@ -96,7 +96,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="A Service Account allows service within a Namespace to call the K8s API Server." %} 
 
 {% highlight yaml %}
-{% include examples/pod-sa.yaml %}
+{% include K8s/examples/pod-sa.yaml %}
 {% endhighlight %}
 
 ### Pod with liveness probe
@@ -104,7 +104,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="There are thresholds to consider the process as dead." %} 
 
 {% highlight yaml %}
-{% include examples/pod-liveness.yaml %}
+{% include K8s/examples/pod-liveness.yaml %}
 {% endhighlight %}
 
 ### Pod with readiness probe
@@ -112,7 +112,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="There are thresholds to consider the process as ready." %} 
 
 {% highlight yaml %}
-{% include examples/pod-readiness.yaml %}
+{% include K8s/examples/pod-readiness.yaml %}
 {% endhighlight %}
 
 ### Pod with security context
@@ -120,7 +120,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="A Security Context allows to set up a UID and GID under which the container process will execute." %} 
 
 {% highlight yaml %}
-{% include examples/pod-security-context.yaml %}
+{% include K8s/examples/pod-security-context.yaml %}
 {% endhighlight %}
 
 ### Pod with resource declaration
@@ -128,7 +128,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="If a Namespace defines quotas then resource declaration is mandatory." %}
 
 {% highlight yaml %}
-{% include examples/Pod-resources.yaml %}
+{% include K8s/examples/Pod-resources.yaml %}
 {% endhighlight %}
 
 ### Pod with main and Sidecar containers
@@ -136,7 +136,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="There are other multi-container patterns such as Ambassador or Adapter." %}
 
 {% highlight yaml %}
-{% include examples/pod-sidecar.yaml %}
+{% include K8s/examples/pod-sidecar.yaml %}
 {% endhighlight %}
 
 ## ⏰ Jobs
@@ -153,17 +153,17 @@ kubectl create job j1 --image=alpine --restart=OnFailure -- date
 kubectl get jobs
 {% endhighlight %}
 
-A Job YAML **manifest**
+A **Job** YAML **manifest**
 
 {% highlight yaml %}
-{% include examples/job.yaml %}
+{% include K8s/examples/job.yaml %}
 {% endhighlight %}
+
+{% include remember.markdown content="Jobs are based on a **templated Pod**." %}
 
 {% include remember.markdown content="Parallelism and deadlines allow to have finer control of Job execution." %}
 
-{% include remember.markdown content="The Pod used to incarnate your Job will remain unless you set `ttlSecondsAfterFinished`." %} 
-
-{% include remember.markdown content="Jobs are based on a templated Pod." %}
+{% include remember.markdown content="The Pod used to incarnate your Job **will remain** unless you set `ttlSecondsAfterFinished`." %} 
 
 Create a **Cron Job** scheduled once per minute
 {% highlight shell %}
@@ -177,13 +177,13 @@ List **Cron Jobs**
 kubectl get cronjobs
 {% endhighlight %}
 
-A Cron Job YAML **manifest**
+A **Cron Job** YAML **manifest**
 
 {% highlight yaml %}
-{% include examples/cronjob.yaml %}
+{% include K8s/examples/cronjob.yaml %}
 {% endhighlight %}
 
-{% include remember.markdown content="Cron Jobs are based on a templated Job." %}
+{% include remember.markdown content="Cron Jobs are based on a **templated Job**." %}
 
 You can list the **Pods launched** to incarnate and execute your (Cron) Job:
 
@@ -196,7 +196,7 @@ NAME                       READY   STATUS              RESTARTS   AGE    LABELS
 my-cjob-1592928720-rgvsd   0/1     Completed           0          3m3s   app=my-cjob,job-name=my-cjob-1592928720
 {% endhighlight %}
 
-{% include remember.markdown content="For Cron Jobs there is a limit in the number of Pods kept in history as per the `successfulJobsHistoryLimit` parameter." %}
+{% include remember.markdown content="For Cron Jobs there is a **limit** in the number of Pods kept in **history** as per the `successfulJobsHistoryLimit` parameter." %}
 
 You can **inspect logs** of a (Cron) Job by showing logs of an incarnating Pod:
 

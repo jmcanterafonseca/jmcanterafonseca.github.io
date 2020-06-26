@@ -137,7 +137,7 @@ of type `kubernetes.io/service-account-token`." %}
 How to use a Config Map with **direct mapping to env variables**:
 
 {% highlight yaml %}
-{% include examples/configmap-env.yaml %}
+{% include K8s/examples/configmap-env.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="An env var will be created for each ConfigMap's name/value pair." %}
@@ -151,7 +151,7 @@ ConfigMap's or Secret's **name/value pairs** can also be mapped to **custom env 
 env var `SECRET567` is mapped to the name/value pair `pwd` of the Secret `s1`. 
 
 {% highlight yaml %}
-{% include examples/secret-env-var.yaml %}
+{% include K8s/examples/secret-env-var.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="The same can be done with Config Map using `configMapKeyRef` 
@@ -164,7 +164,7 @@ Then, such volume can be **mounted** to a folder by containers. Such folder will
 The **name** of the file will correspond to the **key name** and the **content** of the file will be the **key value**. 
 
 {% highlight yaml %}
-{% include examples/configmap-volume.yaml %}
+{% include K8s/examples/configmap-volume.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="The same can be done with Secret using `secret` 
@@ -173,7 +173,7 @@ instead of `configMap`." %}
 It is also possible to **map** specific name/value pairs of a Secret or Config Map to a **path**. See below
 
 {% highlight yaml %}
-{% include examples/secret-volume-item.yaml %}
+{% include K8s/examples/secret-volume-item.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}
@@ -189,7 +189,7 @@ kubectl exec my-pod-4 -it -n jmcf -- cat /etc/foo/credentials/username.conf
 `emptyDir` allows to create a **transient Volume** for a Pod.
 
 {% highlight yaml %}
-{% include examples/emptydir-volume.yaml %}
+{% include K8s/examples/emptydir-volume.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}
@@ -203,7 +203,7 @@ kubectl exec -it -f emptydir-volume.yaml -- cat /var/log/app.txt
 How to create a **Persistent Volume** (PV)
 
 {% highlight yaml %}
-{% include examples/pv.yaml %}
+{% include K8s/examples/pv.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}
@@ -224,7 +224,7 @@ mypv-tutorial   20Mi       RWO,RWX        Retain           Available           c
 A Persistent Volume Claim (PVC) is a **request for storage** by a user. **PVCs consume PV resources**. Claims can request specific size and access modes.
 
 {% highlight yaml %}
-{% include examples/pvc.yaml %}
+{% include K8s/examples/pvc.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}
@@ -255,7 +255,7 @@ PVs can be created dynamically to meet the demands of a PVC." %}
 ### Mounting Persistent Volume Claims
 
 {% highlight yaml %}
-{% include examples/pod-pvc.yaml %}
+{% include K8s/examples/pod-pvc.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}

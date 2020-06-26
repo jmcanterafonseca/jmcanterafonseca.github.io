@@ -25,7 +25,7 @@ kubectl create deployment ex1 --image=nginx  --dry-run=client -o=yaml > dep1.yam
 Then such deployment can be tuned, for instance **setting** the number of desired **replicas**:
 
 {% highlight yaml %}
-{% include examples/dep1.yaml %}
+{% include K8s/examples/dep1.yaml %}
 {% endhighlight %}
 
 Check Deployment **status**:
@@ -162,7 +162,7 @@ kubectl create service clusterip my-service --tcp=80:80 --clusterip="None" --dry
 {% endhighlight %}
 
 {% highlight yaml %}
-{% include examples/service.yaml %}
+{% include K8s/examples/service.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="The name of a Service object must be a **valid DNS** label name." %}
@@ -208,7 +208,7 @@ kubectl create service clusterip my-service --tcp=8080:80 --dry-run=client -o=ya
 {% endhighlight %}
 
 {% highlight yaml %}
-{% include examples/service-clusterip.yaml %}
+{% include K8s/examples/service-clusterip.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="`targetPort` (the second element in the `--tcp` parameter) is the Pod's **container port**." %}
@@ -249,7 +249,7 @@ kubectl create service nodeport my-service-np --tcp=8080:80 --dry-run=client -o=
 {% endhighlight %}
 
 {% highlight yaml %}
-{% include examples/service-nodeport.yaml %}
+{% include K8s/examples/service-nodeport.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}
@@ -296,7 +296,7 @@ kubectl run test1 -it --rm=true --image=busybox --restart=Never -n jmcf -- wget 
 An Ingress which enables **reverse proxying** to your Service from a canonical address:
 
 {% highlight yaml %}
-{% include examples/ingress.yaml %}
+{% include K8s/examples/ingress.yaml %}
 {% endhighlight %}
 
 Then you can **get access** to your Service through (provided external **DNS entry** or `etc/hosts` has been set up):
@@ -322,7 +322,7 @@ kubectl label namespace jmcf 'project=ckad'
 {% include remember.markdown content="Namespace selector needs matching labels." %}
 
 {% highlight yaml %}
-{% include examples/network-policy.yaml %}
+{% include K8s/examples/network-policy.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}

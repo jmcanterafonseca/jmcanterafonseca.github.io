@@ -86,7 +86,7 @@ kubectl config view
 {% endhighlight %}
 
 {% highlight yaml %}
-{% include examples/config.yaml %}
+{% include K8s/examples/config.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="Remember the structure of Configurations and Contexts:" %} 
@@ -138,7 +138,7 @@ kubectl create namespace ex-ns
 Defining a **Resource Quota** for a Namespace:
 
 {% highlight yaml %}
-{% include examples/resource-quota.yaml %}
+{% include K8s/examples/resource-quota.yaml %}
 {% endhighlight %}
 
 {% highlight shell %}
