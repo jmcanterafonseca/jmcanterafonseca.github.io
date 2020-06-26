@@ -1,1 +1,1 @@
-📘 **Reference Documentation:** [{{include.content}}]({{include.content}})
+📘 **Doc Reference:** [{{include.content}}]({{include.content}})

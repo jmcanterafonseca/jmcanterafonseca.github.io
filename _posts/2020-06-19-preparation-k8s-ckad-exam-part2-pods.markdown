@@ -138,7 +138,7 @@ Hereby you will find some pod manifest examples highlighting different features 
 {% include examples/pod-sidecar.yaml %}
 {% endhighlight %}
 
-## ⌨️ Jobs
+## ⏰ Jobs
 
 {% include see-also.markdown content="https://kubernetes.io/docs/tasks/job/" %}
 
