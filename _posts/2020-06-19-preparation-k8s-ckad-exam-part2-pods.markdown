@@ -128,7 +128,7 @@ Hereby you will find some Pod manifest examples highlighting different features 
 {% include remember.markdown content="If a Namespace defines quotas then resource declaration is mandatory." %}
 
 {% highlight yaml %}
-{% include K8s/examples/Pod-resources.yaml %}
+{% include K8s/examples/pod-resources.yaml %}
 {% endhighlight %}
 
 ### Pod with main and Sidecar containers
@@ -188,12 +188,12 @@ A **Cron Job** YAML **manifest**
 You can list the **Pods launched** to incarnate and execute your (Cron) Job:
 
 {% highlight shell %}
-kubectl get Pods -n jmcf --show-labels --selector='app=my-cjob'
+kubectl get pods -n jmcf --show-labels --selector='app=my-cjob'
 {% endhighlight %}
 
 {% highlight shell %}
 NAME                       READY   STATUS              RESTARTS   AGE    LABELS
-my-cjob-1592928720-rgvsd   0/1     Completed           0          3m3s   app=my-cjob,job-name=my-cjob-1592928720
+my-cjob-1592928720-rgvsd   0/1     Completed           0          3m3s   app=my-cjob
 {% endhighlight %}
 
 {% include remember.markdown content="For Cron Jobs there is a **limit** in the number of Pods kept in **history** as per the `successfulJobsHistoryLimit` parameter." %}
