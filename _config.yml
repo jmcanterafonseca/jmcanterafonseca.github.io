@@ -58,3 +58,4 @@ exclude:
    - vendor/gems/
    - vendor/ruby/
 
+repository: jmcanterafonseca/jmcanterafonseca.github.io
