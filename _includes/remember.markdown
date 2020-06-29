@@ -1,1 +1,1 @@
-💡 *{{include.content}}*
+📌 {{include.content}}
