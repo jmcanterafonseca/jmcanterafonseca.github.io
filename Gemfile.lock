@@ -236,7 +236,7 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
-    zeitwerk (2.3.0)
+    zeitwerk (2.3.1)
 
 PLATFORMS
   ruby
@@ -244,6 +244,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages (~> 206)
   jekyll-feed (~> 0.12)
+  jekyll-paginate (~> 1.1.0)
   jekyll-seo-tag (~> 2.6.1)
   jekyll-sitemap (~> 1.4.0)
   minima (~> 2.5.1)

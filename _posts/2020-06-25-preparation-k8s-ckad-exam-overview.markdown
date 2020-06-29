@@ -2,7 +2,7 @@
 layout: post
 title:  "CKAD Exam Preparation - Overview"
 date:   2020-06-25 08:00:00 +0200
-categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation 
+categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD 
 ---
 
 ## ▶️ Introduction

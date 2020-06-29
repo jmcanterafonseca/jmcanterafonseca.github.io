@@ -2,7 +2,7 @@
 layout: post-with-toc
 title:  "CKAD Exam Preparation 1/4 - Cross Cutting Aspects"
 date:   2020-06-16 08:00:00 +0200
-categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation
+categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
 ---
 

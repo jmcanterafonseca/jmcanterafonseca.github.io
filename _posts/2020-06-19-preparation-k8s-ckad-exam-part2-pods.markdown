@@ -2,7 +2,7 @@
 layout: post-with-toc
 title:  "CKAD Exam Preparation 2/4 - Pods and Jobs"
 date:   2020-06-19 08:00:00 +0200
-categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Linux Foundation Pods
+categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Pods Jobs
 feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
 ---
 
