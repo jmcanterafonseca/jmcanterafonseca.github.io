@@ -23,7 +23,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   A technical blog expressing my own views on software and ICT, including but not limited to 
   Software Engineering, Cloud Native Computing, Open Linked Data, IoT and DLTs.
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://canterafonseca.eu" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://canterafonseca.es" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:  jmcantera
 github_username:   jmcanterafonseca
 linkedin_username: jmcanterafonseca
