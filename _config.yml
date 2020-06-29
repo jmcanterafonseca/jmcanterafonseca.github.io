@@ -65,3 +65,8 @@ minima:
   social_links:
     twitter: jmcantera
     github:  jmcanterafonseca
+
+link-tags: true
+
+disqus:
+    shortname: josmcantera
