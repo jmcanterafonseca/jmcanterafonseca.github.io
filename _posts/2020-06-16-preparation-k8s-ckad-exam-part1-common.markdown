@@ -1,6 +1,7 @@
 ---
 layout: post-with-toc
 title:  "CKAD Exam Preparation 1/4 - Cross Cutting Aspects"
+description: "This part covers cross-cutting aspects to be known in order to pass the CKAD Certification Exam"
 date:   2020-06-16 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD
 ---

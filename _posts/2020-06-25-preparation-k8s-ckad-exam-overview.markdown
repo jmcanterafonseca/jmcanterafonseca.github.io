@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "CKAD Exam Preparation - Overview"
+description: "This blog post series summarizes the study notes I have been taking during the preparation of 
+the Certified Kubernetes Application Developer (CKAD) Exam"
 date:   2020-06-25 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD
 comments: false 
@@ -9,7 +11,7 @@ comments: false
 ## ▶️ Introduction
 
 This blog post series summarizes the study notes I have been taking during the preparation of 
-the [Certified Kubernetes Application Developer](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad) (CKAD) exam. 
+the [Certified Kubernetes Application Developer](https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad) (CKAD) Exam. 
 
 The CKAD is a certification offered by the [Cloud Native Computing Foundation](https://www.cncf.io/), a project hosted by the [Linux Foundation](https://www.linuxfoundation.org/).
 It is intended to assess your skills as an application developer able *to define application resources and use core primitives to build, monitor, and troubleshoot scalable applications and tools in Kubernetes (K8s)*. If you want to start learning K8s I would recommend this training course of the Linux Foundation: [Introduction to Kubernetes](https://www.edx.org/es/course/introduction-to-kubernetes). 

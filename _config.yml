@@ -24,6 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Software Engineering, Cloud Native Computing, Open Linked Data, IoT and DLTs.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://canterafonseca.es" # the base hostname & protocol for your site, e.g. http://example.com
+
 twitter_username:  jmcantera
 github_username:   jmcanterafonseca
 linkedin_username: jmcanterafonseca
@@ -32,6 +33,8 @@ google_analytics: "UA-170127944-2"
 
 # Build settings
 theme: minima
+
+permalink: /:categories/:title:output_ext
 
 plugins:
   - jekyll-feed
