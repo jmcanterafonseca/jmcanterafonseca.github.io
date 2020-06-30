@@ -1,6 +1,7 @@
 {% if page.comments != false and jekyll.environment == 'production' %}
 
   <div id="disqus_thread"></div>
+
   <script>
     var disqus_config = function () {
       this.page.url = '{{ page.url | absolute_url }}';
@@ -8,7 +9,7 @@
     };
     (function() {
       var d = document, s = d.createElement('script');
-      s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
+      s.src = 'https://canterafonseca-es.disqus.com/embed.js';
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
     })();
