@@ -3,7 +3,6 @@ layout: post-with-toc
 title:  "CKAD Exam Preparation 2/4 - Pods and Jobs"
 date:   2020-06-19 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD Pods Jobs
-feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/2"
 ---
 
 ## ▶️ Introduction
@@ -163,7 +162,9 @@ A **Job** YAML **manifest**
 
 {% include remember.markdown content="Parallelism and deadlines allow to have finer control of Job execution." %}
 
-{% include remember.markdown content="The Pod used to incarnate your Job **will remain** unless you set `ttlSecondsAfterFinished`." %} 
+{% include remember.markdown content="The Pod used to incarnate your Job **will remain** unless you set `ttlSecondsAfterFinished`." %}
+
+### Cron Jobs
 
 Create a **Cron Job** scheduled once per minute
 {% highlight shell %}

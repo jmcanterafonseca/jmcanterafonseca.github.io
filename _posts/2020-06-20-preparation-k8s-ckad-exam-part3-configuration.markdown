@@ -3,7 +3,6 @@ layout: post-with-toc
 title:  "CKAD Exam Preparation 3/4 - Configuration and Volumes"
 date:   2020-06-20 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD configuration volumes secrets
-feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/3"
 ---
 
 ## ▶️ Introduction

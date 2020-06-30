@@ -3,7 +3,6 @@ layout: post-with-toc
 title:  "CKAD Exam Preparation 1/4 - Cross Cutting Aspects"
 date:   2020-06-16 08:00:00 +0200
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD
-feedback: "https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/issues/1"
 ---
 
 ## ▶️ Introduction
@@ -127,13 +126,13 @@ kubectl --all-namespaces
 
 ### Resource Quotas
 
+{% include see-also.markdown content="https://kubernetes.io/docs/concepts/policy/resource-quotas/" %}
+
 Create a new **Namespace**:
 
 {% highlight shell %}
 kubectl create namespace ex-ns
 {% endhighlight %}
-
-{% include see-also.markdown content="https://kubernetes.io/docs/concepts/policy/resource-quotas/" %}
 
 Defining a **Resource Quota** for a Namespace:
 
