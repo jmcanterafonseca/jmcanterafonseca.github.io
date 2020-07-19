@@ -152,6 +152,16 @@ ex-resource-quota   2m40s   pods: 0/5, requests.cpu: 0/2, requests.memory: 0/1Gi
 
 {% include remember.markdown content="Once a **Namespace** defines **Resource Quotas**, an object must  `request` its **minimum resource requirements**. If there are not sufficient available resources in the Namespace based on the `request` **an object may not run** or may be killed." %}
 
+### Name resolution
+
+{% include see-also.markdown content="https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/" %}
+
+The `dnsutils` Pod can be used to check that DNS resolutions are working properly. 
+
+{% highlight shell %}
+kubectl exec -it dnsutils -- nslookup my-service
+{% endhighlight %}
+
 ## ✂️ Generic Operations
 
 **Create** an object:
