@@ -7,7 +7,3 @@ https://canterafonseca.eu
 All the posted articles in this repository/blog are: 
 
 Copyright (c) 2020 José Manuel Cantera Fonseca and licensed under a [Creative Commons by Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) License.
-
-
-
-
