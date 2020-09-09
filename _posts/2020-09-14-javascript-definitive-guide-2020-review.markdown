@@ -31,15 +31,15 @@ Personally, (I have been working regularly with Javascript during the last 10 ye
 
 * New Javascript operators:
 
-** Conditional Property access: `a.b?.c`
+  ** Conditional Property access: `a.b?.c`
 
-** Conditional Invocation: `log?.(x)`
+  ** Conditional Invocation: `log?.(x)`
 
-** First Defined Operator: `a ?? b ?? c`
+  ** First Defined Operator: `a ?? b ?? c`
 
-** Spread operator `const myObj = { ...otherObj }`
+  ** Spread operator `const myObj = { ...otherObj }`
 
-** Computed Properties: `const obj = { [PROPERTY_NAME]: "x" }`
+  ** Computed Properties: `const obj = { [PROPERTY_NAME]: "x" }`
 
 * Asynchronous Programming under the hoods:  The journey from callbacks to `await` / `async` stopping by `Promise`. 
 
