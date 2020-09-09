@@ -31,27 +31,19 @@ Personally, (I have been working regularly with Javascript during the last 10 ye
 
 * New Javascript operators:
 
-  ** Conditional Property access: `a.b?.c`
-
-  ** Conditional Invocation: `log?.(x)`
-
-  ** First Defined Operator: `a ?? b ?? c`
-
-  ** Spread operator `const myObj = { ...otherObj }`
-
-  ** Computed Properties: `const obj = { [PROPERTY_NAME]: "x" }`
+  - Conditional Property access: `a.b?.c`
+  - Conditional Invocation: `log?.(x)`
+  - First Defined Operator: `a ?? b ?? c`
+  - Spread operator `const myObj = { ...otherObj }`
+  - Computed Properties: `const obj = { [PROPERTY_NAME]: "x" }`
 
 * Asynchronous Programming under the hoods:  The journey from callbacks to `await` / `async` stopping by `Promise`. 
 
-**  `Promise`, `Promise.allSettled` vs `Promise.all`. Promise settlement explained. 
-
-** `await`, `async` operators and their implementation. 
-
-** Asynchronous iteration (`for await` loops). 
-
-** Event Emitters in Node. 
-
-** Workers (both Node and Web Browser) and Child Processes.
+  - `Promise`, `Promise.allSettled` vs `Promise.all`. Promise settlement explained. 
+  - `await`, `async` operators and their implementation. 
+  - Asynchronous iteration (`for await` loops). 
+  - Event Emitters in Node. 
+  - Workers (both Node and Web Browser) and Child Processes.
 
 * Modules: The journey from CommonJS Modules to the standard `import` and `export` sentences. How modules are declared and work in a Web Browser execution environment: `<script type=module>`. 
 
@@ -59,17 +51,12 @@ Personally, (I have been working regularly with Javascript during the last 10 ye
 
 * New APIs:
 
-** `Map`, `Set` classes. 
-
-** URL APIs and fetch API (goodbye to XHR). 
-
-** Typed Arrays 
-
-** Streams
-
-** Internationalization API
-
-** Fully-fledged Console APIs
+  - `Map`, `Set` classes. 
+  - URL APIs and fetch API (goodbye to XHR). 
+  - Typed Arrays 
+  - Streams
+  - Internationalization API
+  - Fully-fledged Console APIs
 
 ## Conclusions
 
