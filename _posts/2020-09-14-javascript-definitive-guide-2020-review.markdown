@@ -11,9 +11,9 @@ comments: false
 
 Javascript is a language in continuos evolution. From its original roots as a form validation language on the Web to being nowadays a complete programming language intended to both front-end and backend (Node.js) development. During this more than **20 years** journey the language has been extended, and starting from 2015, (*ES6* major milestone) it has evolved year after year incorporating different features largely demanded by the community.
 
-As strong tech professionals, we are required not to only keep up to date on this important technology, but also to **fully understand** how it works under the hood, including its main APIs, operators and idiomatic constructs. I have always considered [David Flanagan](https://davidflanagan.com/)'s books the reference ones on Javascript. I had the honour to work together with him in the Firefox OS project and he kindly arranged to hand me a copy of the [Seventh Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/) that has came out very recently. [Sixth edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781449393854/) was published 9 years ago and since then Javascript has consolidated as one of the most modern, active and flexible programming languages. 
+As strong tech professionals, we are required not to only keep up to date on this important technology, but also to **fully understand** how it works under the hood, including its main APIs, operators and idiomatic constructs. I have always considered [David Flanagan](https://davidflanagan.com/)'s books the reference ones on Javascript. [Sixth edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781449393854/) was published 9 years ago and since then Javascript has consolidated as one of the most modern, active and flexible programming languages. I had the honour to work together with David in the Firefox OS project and he kindly arranged to hand me a copy of the [Seventh Edition](https://www.oreilly.com/library/view/javascript-the-definitive/9781491952016/) that has came out very recently. 
 
-This blog post is a summary of the main **review highlights** I can make after reading the book. I can confess that I have really enjoyed it, as it has helped me to gain an overview of where the language is and where it is headed to. In addition, I have been able to fully grasp, among other things, how *classes*, *modules* or *asynchronous operators* really work. 
+This blog post is a summary of the main **review highlights** I can make after reading the **7th edition** of *"Javascript. The Definitive Guide"*. I can confess that I have really enjoyed it, as it has helped me to gain an overview of where the language is and where it is headed to. In addition, I have been able to fully grasp, among other things, how *classes*, *modules* or *asynchronous operators* really work. 
 
 ## 📖 General overview of the book
 
@@ -39,7 +39,8 @@ Personally, (I have been working regularly with Javascript during the last 10 ye
 
 * Asynchronous Programming under the hood:  
   - The journey from old school callbacks to `await` / `async` stopping by `Promise`. 
-  - `Promise.allSettled` vs `Promise.all`. Promise chaining, resolution, settlement and catch thoroughly explained. 
+  - `Promise.allSettled` vs `Promise.all`. 
+  - Promise chaining, resolution, settlement and error catch thoroughly explained. 
   - `await`, `async` operators and how they work at lower level. 
   - Asynchronous iteration (`for await` loops). 
   - Event Emitters in Node. 
@@ -47,8 +48,8 @@ Personally, (I have been working regularly with Javascript during the last 10 ye
 
 
 * Modules: 
-  - The journey from CommonJS Modules to the standard `import` and `export` sentences. 
-  - How modules are declared and work in a Web Browser execution environment: `<script type=module>`. 
+  - The journey from CommonJS Modules (`require`) to the standard `import` and `export` sentences. 
+  - How modules are declared and loaded in a Web Browser execution environment: `<script type=module>`. 
 
 
 * Classes: 
