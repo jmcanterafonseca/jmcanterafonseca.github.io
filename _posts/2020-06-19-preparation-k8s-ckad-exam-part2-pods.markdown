@@ -45,7 +45,7 @@ kubectl exec b1 -it -- env
 **Running** a "casual", temporal Pod inside a Cluster:
 
 {% highlight shell %}
-kubectl run tmPod -it --image=busybox --restart=Never --rm=true -- sh
+kubectl run tm-pod -it --image=busybox --restart=Never --rm=true -- sh
 {% endhighlight %}
 
 {% include remember.markdown content="`-it` allows to attach your container to the local console." %} 
