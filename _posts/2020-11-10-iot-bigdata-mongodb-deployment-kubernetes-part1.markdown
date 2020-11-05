@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Deploying a datastore for IoT & Big Data: mongoDB on Kubernetes. Part I. Secure Replica Set"
+title:  "Deploying datastores for IoT & Big Data: mongoDB on K8s. Secure Replica Set"
 description: "This blog post describes how a mongoDB replica set can be deployed and secured on Kubernetes"
-date:   2020-10-10 08:00:00 +0200
+date:   2020-11-10 08:00:00 +0200
 categories: K8s Kubernetes statefulset mongoDB replica set security IoT Big Data TLS cloud native computing
 comments: true 
 ---
