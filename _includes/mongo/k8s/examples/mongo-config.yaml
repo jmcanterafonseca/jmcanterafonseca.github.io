@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config 
+  namespace: datastores
+data:
+  REPLICA_SET_NAME: replica-blog-1
