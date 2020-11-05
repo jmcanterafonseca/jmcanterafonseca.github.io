@@ -9,17 +9,17 @@ comments: true
 
 ## 🎬 Introduction
 
-This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT and Big Data services can be deployed on Kubernetes. To start with, the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive will be used to set up and deploy a [mongoDB Replica Set](). Then, it will demonstrated how other Kubernetes primitives such as [Secret]() can be applied to secure our initial, dummy deployment. An upcoming article will explain how to [shard]() mongoDB. It is assumes that you already have an up and running K8s cluster, such as [minikube](). 
+This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. To start with, the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive will be used to set up and deploy a [mongoDB Replica Set](). Then, it will demonstrated how other Kubernetes primitives such as [Secret]() can be applied to secure our initial, dummy deployment. An upcoming article will explain how to [shard]() mongoDB. It is assumed that you already have an up and running K8s cluster, such as [minikube](). 
 
 ## 📖 StatefulSet Primitive
 
 A StatefulSet is a K8s [Controller](https://kubernetes.io/docs/concepts/architecture/controller/) that manages the deployment and scaling of a set of Pods based on an identical container spec. However, conversely to what happens with [Deployment]() Controllers, these Pods are not interchangeable: each Pod has a persistent identifier that it maintains across any rescheduling.
 
-A StatefulSet shall be associated to a [Service](), to expose its Pods, and to a [PersistentVolumeClaim]() to gain persistent storage.  
+A StatefulSet shall be associated to a [Service](), to expose its Pods, and to a [PersistentVolumeClaim]() template to gain persistent storage for Pods.  
 
 ## Basic Deployment of a mongoDB Replica Set
 
-First of all a new namespace named `datastores` is created. 
+First of all, a new namespace named `datastores` is created. 
 
 {% highlight shell %}
 kubectl create namespace datastores
@@ -39,15 +39,18 @@ Also it would be convenient to set up a ConfigMap to support configuration optio
 {% include mongo/k8s/examples/mongo-config.yaml %}
 {% endhighlight %}
 
-Afterwards, the meaty part comes, which is the definition of our StatefulSet as follows:
+Afterwards, the meaty part comes, the declaration of our StatefulSet:
 
 {% highlight yaml %}
 {% include mongo/k8s/examples/basic-mongo.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="We reference the Service created before: `mongo-db-replica`." %}
-{% include remember.markdown content="We run containers labelled as `app: mongoDB-replica` in replica set mode." %}
+
+{% include remember.markdown content="We run containers labelled as `app: mongoDB-replica` in mongoDB's replica set mode." %}
+
 {% include remember.markdown content="We mount a volume `mongo-volume-for-replica` that will be made available through a PersistentVolumeClaim." %}
+
 {% include remember.markdown content="With `volumeClaimTemplates` we define the template of the PersistentVolumeClaims that will automatically be created for each Pod." %}
 
 After applying the manifest shown above this will be the status of our K8s cluster: 
@@ -113,6 +116,7 @@ kubectl run tm-pod --namespace=datastores -it --image=busybox --restart=Never --
 {% endhighlight %}
 
 {% include remember.markdown content="Pods pertaining to a StatefulSet are distinguishable and keep their own identity. That's why we can address them by `<pod_id>.<service_name>`." %}
+
 {% include remember.markdown content="The identifier of a Pod pertaining to a StatefulSet is formed by concatenating the name of the StatefulSet (`mongo-db-statefulset`) with a dash (`-`) and the order number (`0`, `1`, `2`, etc.)." %}
 
 ## Configuring the mongoDB Replica Set
@@ -124,3 +128,5 @@ kubectl run tm-pod --namespace=datastores -it --image=busybox --restart=Never --
 ## 🖊️ Conclusions
 
 Kubernetes provides powerful primitives to deploy a professional-grade mongoDB datastore service. However, we can go one step further and deploy a sharded mongoDB so that we can scale and give support to IoT and Big Data Applications with further scalability demands. 
+
+{% include feedback.markdown %}
