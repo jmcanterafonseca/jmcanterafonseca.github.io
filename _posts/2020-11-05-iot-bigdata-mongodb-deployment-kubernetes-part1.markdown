@@ -161,7 +161,9 @@ In this case at shell start up it is executed a sentence (`--eval` param) that a
 {% include mongo/k8s/examples/db-operations-replica.js %}
 {% endhighlight %}
 
-### Stopping the Datastore cluster
+## 🧱 Replica Set Management
+
+### Stopping the Replica Set cluster
 
 We can stop our mongoDB datastore cluster by scaling it to `0`, as follows: 
 
@@ -191,6 +193,8 @@ mongo-volume-for-replica-mongo-db-statefulset-2   Bound    pvc-a7d8196b-ae94-43f
 {% endhighlight %}
 
 The PVCs are still there so that our data has not been lost. 
+
+### Restarting the Replica Set cluster
 
 We can restart our mongoDB replica set by scaling out to `3` again. 
 
