@@ -22,9 +22,29 @@ spec:
     spec: 
       terminationGracePeriodSeconds: 10
       volumes: 
-        - name: secret-volume
+        - name: initial-secret-volume
           secret:
             secretName: mongo-secret
+        - name: secret-volume
+          emptyDir: {}
+      initContainers:
+        - name: set-file-permissions
+          image: busybox
+          command:
+            - sh
+            - -c
+          args:
+            - >- 
+                 cp /var/init-secrets/replica.key /var/secrets/replica.key &&
+                 chmod 400 /var/secrets/replica.key &&
+                 chown 999:999 /var/secrets/replica.key
+          volumeMounts:
+            - mountPath: /var/init-secrets
+              name: initial-secret-volume
+              readOnly: true
+            - mountPath: /var/secrets
+              name: secret-volume
+              readOnly: false
       containers: 
         - name: mongo-db
           image: mongo:4.2.6
@@ -36,6 +56,7 @@ spec:
               name: mongo-volume-for-replica
             - mountPath: /var/secrets
               name: secret-volume
+              readOnly: true
           args: 
             - --replSet
             - $(REPLICA_SET_NAME)

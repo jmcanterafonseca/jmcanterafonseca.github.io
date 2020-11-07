@@ -69,15 +69,13 @@ kubectl logs mongo-db-statefulset-0 -n sec-datastores
 {% highlight shell %}
 2020-11-07T18:30:38.656+0000 I  ACCESS   [main] permissions on /var/secrets/replica.key are too open{% endhighlight %}
 
-{% highlight yaml %}
-{% include mongo/k8s/examples/secured-mongo.yaml %}
-{% endhighlight %}
-
 Although, initially you could think that the problem can be fixed by using the `defaultMode` field of the Secret Volume declaration, it cannot (as of K8s 1.18 and mongoDB 4.2.6). There is another solution which implies running an initialization container that just copies the required files with the proper permissions to a new Volume. 
 
 {% highlight yaml %}
 {% include mongo/k8s/examples/secured-mongo-2.yaml %}
 {% endhighlight %}
+
+{% include remember.markdown content="." %}
 
 ## Setting up the TLS layer
 
