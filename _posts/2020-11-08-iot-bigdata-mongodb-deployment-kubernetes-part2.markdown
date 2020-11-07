@@ -67,15 +67,26 @@ kubectl logs mongo-db-statefulset-0 -n sec-datastores
 {% endhighlight %}
 
 {% highlight shell %}
-2020-11-07T18:30:38.656+0000 I  ACCESS   [main] permissions on /var/secrets/replica.key are too open{% endhighlight %}
+2020-11-07T18:30:38.656+0000 I  ACCESS   [main] permissions on /var/secrets/replica.key are too open 
+{% endhighlight %}
 
-Although, initially you could think that the problem can be fixed by using the `defaultMode` field of the Secret Volume declaration, it cannot (as of K8s 1.18 and mongoDB 4.2.6). There is another solution which implies running an initialization container that just copies the required files with the proper permissions to a new Volume. 
+Although, initially you could think that the problem can be fixed by using the `defaultMode` field of the Secret Volume declaration, it cannot (as of K8s 1.18 and mongoDB 4.2.6). There is another solution which implies running a Pod initialization container that just copies the required files with the proper permissions to a new Volume that will be the one consumed by the mongoDB container. 
 
 {% highlight yaml %}
 {% include mongo/k8s/examples/secured-mongo-2.yaml %}
 {% endhighlight %}
 
 {% include remember.markdown content="." %}
+
+The next step is connecting to our cluster through the mongoDB shell and configure the Replica Set. Now we need to make use of the root user and pass previously configured as env vars. 
+
+{% highlight shell %}
+kkubectl run tm-mongo-pod --namespace=sec-datastores -it --image=mongo:4.2.6 --restart=Never --rm=true -- mongo -u jmcf -p Lqyr8CvuWsuoSFCN mongo-db-statefulset-0.mongo-db-replica/admin
+{% endhighlight %}
+
+{% include remember.markdown content="So far we have not configured TLS so our DB connection will be through an insecure channel." %}
+
+After checking that we can make an authenticated connection we can execute the Replica Set configuration script and check that our replication is working properly using the replica key provided. Now we are ensuring that the members of our Replica Set can only receive data from parties that know the shared secret (the replica key). 
 
 ## Setting up the TLS layer
 
