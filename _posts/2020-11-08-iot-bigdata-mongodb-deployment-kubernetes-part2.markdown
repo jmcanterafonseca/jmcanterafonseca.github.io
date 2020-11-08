@@ -17,7 +17,7 @@ It is assumed that you already have an up and running K8s environment, such as [
 
 For part 2 we will be using the `sec-datastores` K8s namespace. The same *headless* [Service](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/mongo-service.yaml) and [ConfigMap](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/mongo-config.yaml) that we used on Part 1 need to be created under this namespace. 
 
-## Security Requirements
+### Security Requirements
 
 The following requirements are under the scope of this series part:
 
@@ -131,7 +131,7 @@ First of all we need to generate a new Certificate Signing Request (CSR) for the
 openssl req -new -out mongo.csr -key mongo.key.pem -config ./openssl.conf
 {% endhighlight %}
 
-The [openssl.conf]() file is needed as the CSR need to be generated using an extended feature named [SAN](http://apetec.com/support/GenerateSAN-CSR.htm) (Subject Alternative Names) that allows one certificate to be associated to more than one DNS name, which is what we just need for our three different mongoDB replicas. 
+The [openssl.conf](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/openssl.conf) file is necessary as it is convenient to generate the CSR using an extended X509 feature named [SAN](http://apetec.com/support/GenerateSAN-CSR.htm) (Subject Alternative Names), that allows one certificate to be associated with more than one DNS name.  
 
 We can inspect the content of our CSR as follows:
 
@@ -139,7 +139,7 @@ We can inspect the content of our CSR as follows:
 openssl req -in mongo.csr -noout -text
 {% endhighlight %}
 
-Afterwards we can generate our certificate signed by the minikube CA (you can find the CA's certificate at `$HOME/.minikube/ca.crt`). However we can sign it through a standard K8s manifest for Certificate Signing Requests:
+Afterwards we can generate our certificate signed by the minikube CA (you can find the CA's certificate at `$HOME/.minikube/ca.crt`). However, we can generate the final signed certificate through a standard K8s manifest for Certificate Signing Requests:
 
 {% highlight yaml %}
 {% include mongo/k8s/examples/csr.yaml %}
@@ -164,7 +164,7 @@ We can approve the CSR as follows:
 kubectl certificate approve mongo-csr
 {% endhighlight %}
 
-After the certificate has been approved we need to download it as follows: 
+After the certificate has been approved we can download it as follows: 
 
 {% highlight shell %}
 kubectl get csr/mongo-csr -o jsonpath='{.status.certificate}{"\n"}' | base64 -d > mongo.crt
@@ -199,13 +199,19 @@ We can double-check that our keycert has been properly stored as a K8s secret:
 kubectl get secret mongo-secret -o jsonpath="{.data['tls\.keycert']}" -n sec-datastores | base64 -d
 {% endhighlight %}
 
-Assuming that Secrets are stored in Base64 format in the Secret store which should not happen in a production environment!!. 
+{% include remember.markdown content="We are assuming that Secrets are stored in Base64 format in the Secret store, which should not happen in a production environment!!". 
 
 And now we need to extend our StatefulSet definition to provide the different TLS parameters: 
 
 {% highlight yaml %}
 {% include mongo/k8s/examples/secured-mongo-tls.yaml %}
 {% endhighlight %}
+
+{% include remember.markdown content="The permissions of the keycert file have to be properly set by the init container." %}
+
+{% include remember.markdown content="It is very easy and convenient to point to the CA file as it is always available as part of the Service Account of our Pods." %}
+
+{% include remember.markdown content="`--tlsAllowConnectionsWithoutCertificates` allows clients to connect to the DB using just a user/pass." %}
 
 ### Connecting to the Cluster through TLS
 
@@ -215,8 +221,10 @@ We can connect to the cluster through TLS as follows:
  kubectl run tm-mongo-pod --namespace=sec-datastores -it --image=mongo:4.2.6 --restart=Never --rm=true -- mongo --verbose --tls --tlsCAFile /var/run/secrets/kubernetes.io/serviceaccount/ca.crt  -u jmcf -p Lqyr8CvuWsuoSFCN mongo-db-statefulset-0.mongo-db-replica.sec-datastores.svc.cluster.local/admin
 {% endhighlight %}
 
+{% include remember.markdown content="We are using the FQDN of the mongoDB Pod so that there is a host match at the TLS layer." %}
+
 ## 🖊️ Conclusions
 
-Kubernetes provides powerful primitives to deploy a clustered mongoDB datastore service. Furthermore, we can deploy a secured and sharded mongoDB so that we can give production-grade support to IoT and Big Data Applications which demand higher scalability. 
+Kubernetes provides powerful primitives to deploy a secured, clustered mongoDB datastore service, so that we can give production-grade support to IoT and Big Data Applications which demand higher scalability. 
 
 {% include feedback.markdown %}

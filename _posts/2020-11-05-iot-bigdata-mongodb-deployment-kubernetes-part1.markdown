@@ -9,14 +9,14 @@ comments: true
 
 ## 🎬 Introduction
 
-This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. To start with, the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive will be used to set up and deploy a [mongoDB Replica Set](https://docs.mongodb.com/manual/replication/) (cluster). Then, it will demonstrated how other Kubernetes primitives such as [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) can be applied to secure our initial, dummy deployment. The last article in this series will explain how to [shard](https://docs.mongodb.com/manual/sharding/) a mongoDB cluster. 
+This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. To start with, the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive will be used to set up and deploy a [mongoDB Replica Set](https://docs.mongodb.com/manual/replication/) (cluster). [Part 2]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}) demonstrates how other Kubernetes primitives such as [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) can be applied to secure our initial, dummy deployment. Upcoming articles in this series will explain how to [shard](https://docs.mongodb.com/manual/sharding/) and further secure our mongoDB cluster. 
 
 ### Prerequisites
 
 It is assumed that you already have an up and running K8s environment, such as [minikube](https://minikube.sigs.k8s.io/docs/start/). 
 All the examples have been developed using minikube on macOS Catalina with VirtualBox. 
 
-First of all, a new, clean namespace named `datastores` is created to develop this part. 
+First of all, a new, clean namespace named `datastores` has to be created to develop this part. 
 
 {% highlight shell %}
 kubectl create namespace datastores
