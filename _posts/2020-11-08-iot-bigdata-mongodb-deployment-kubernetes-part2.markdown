@@ -199,7 +199,7 @@ We can double-check that our keycert has been properly stored as a K8s secret:
 kubectl get secret mongo-secret -o jsonpath="{.data['tls\.keycert']}" -n sec-datastores | base64 -d
 {% endhighlight %}
 
-{% include remember.markdown content="We are assuming that Secrets are stored in Base64 format in the Secret store, which should not happen in a production environment!!". 
+{% include remember.markdown content="We are assuming that Secrets are stored in Base64 format in the Secret store, which should not happen in a production environment!!." %}
 
 And now we need to extend our StatefulSet definition to provide the different TLS parameters: 
 
