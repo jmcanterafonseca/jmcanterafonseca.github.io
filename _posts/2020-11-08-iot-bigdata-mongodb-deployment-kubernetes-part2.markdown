@@ -48,7 +48,7 @@ openssl rand 4096 | tr -cd '[:alnum:];@$#' | head -c 16; echo
 Lqyr8CvuWsuoSFCN
 {% endhighlight %}
 
-### Creating mongoDB Secret
+### Creating K8s Secret for mongoDB
 
 The password of the root user and the replica key shall be stored on a K8s **Secret**. 
 
@@ -60,7 +60,7 @@ The password of the root user and the replica key shall be stored on a K8s **Sec
 
 ### Securing StatefulSet of Part 1
 
-Our extended StatefulSet manifest would be as follows:
+In part 1 we defined an [initial version](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/basic-mongo.yaml) of our StatefulSet that can be extended as follows:
 
 {% highlight yaml %}
 {% include mongo/k8s/examples/secured-mongo.yaml %}
@@ -90,6 +90,8 @@ Although, initially you could think that the permissions problem can be fixed by
 
 {% include remember.markdown content="Once the initialization command completes, the init container will die. In case of failure, the logs of the init container can be obtained using the `-container` option of `kubectl logs`." %}
 
+### Configuring the mongoDB Replica Set
+
 The next step is connecting to our cluster through the mongoDB shell and configure the Replica Set. Now we need to make use of the root user and pass previously configured as env vars. 
 
 {% highlight shell %}
@@ -101,7 +103,6 @@ kubectl run tm-mongo-pod --namespace=sec-datastores -it --image=mongo:4.2.6 --re
 After checking that we can make an authenticated connection we can execute the [Replica Set configuration script](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/configure-replicaset.js) and check that our [replication is working properly](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/db-operations.js) using the replica key provided. Now we are ensuring that the members of our Replica Set can only receive data from parties that know the shared secret (the replica key). 
 
 ## Setting up the TLS layer
-
 
 ### Create a CSR to be signed by the K8s CA
 
