@@ -104,11 +104,104 @@ After checking that we can make an authenticated connection we can execute the [
 
 ## Setting up the TLS layer
 
+In order to meet our initial requirements, a TLS layer has to be set up. It implies that not only DB clients must connect through TLS to the DB but also the communication between the replicas of the mongoDB cluster must happen through TLS. 
+
 ### Create a CSR to be signed by the K8s CA
 
+The first step is to generate a new RSA private key (2048 bits) as follows:
+
+{% highlight shell %}
+openssl genrsa -out mongo.key.pem 2048
+{% endhighlight %}
+
+Once we have the Private key we need to generate a new Certificate. An interesting approach would be to generate a Certificate signed by the Kubernetes CA itself. As that is a CA known by all Pods through the default Service Account. 
+
+First of all we need to generate a new Certificate Signing Request (CSR):
+
+{% highlight shell %}
+openssl req -new -out mongo.csr -key mongo.key.pem -config ./openssl.conf
+{% endhighlight %}
+
+Our CSR has to be generated using an extended feature named SAN (Subject Alternative Names) that allows one certificate to be associated to more than one DNS name, which is what we just need for our three different replicas. 
+
+We can inspect the contents of our CSR as follows:
+
+{% highlight shell %}
+openssl req -in mongo.csr -noout -text
+{% endhighlight %}
+
+Afterwards we can generate our certificate signed by the minikube CA (you can find the certificate at `$HOME/.minikube/ca.crt). However we can do it through an standard K8s manifest for Certificate Signing Request:
+
+{% highlight yaml %}
+{% include mongo/k8s/examples/csr.yaml %}
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl apply -f csr.yaml
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl get csr
+{% endhighlight %}
+
+{% highlight shell %}
+NAME        AGE   SIGNERNAME                     REQUESTOR       CONDITION
+mongo-csr   16s   kubernetes.io/legacy-unknown   minikube-user   Pending
+{% endhighlight %}
+
+{% highlight shell %}
+kubectl certificate approve mongo-csr
+{% endhighlight %}
+
+After the Certificate has been approved we need to download it as follows: 
+
+{% highlight shell %}
+kubectl get csr/mongo-csr -o jsonpath='{.status.certificate}{"\n"}' | base64 -d > mongo.crt
+{% endhighlight %}
+
+We can inspect the contents of our certificate as follows:
+
+{% highlight shell %}
+openssl x509 -in mongo.crt -noout -text
+{% endhighlight %}
+
+Now we have all we need to set up TLS for our mongoDB cluster! 
 
 ### Extending StatefulSet to support TLS
 
+First of all we need to extend our Secret to include the private key and the certificate. mongoDB requires both to be concatenated on the same file: 
+
+{% highlight shell %}
+cat mongo.key.pem mongo.crt >> mongo.keycert
+cat mongo.keycert | base64
+{% endhighlight %}
+
+We add the keycert file content as a base64-encoded Secret property: 
+
+{% highlight yaml %}
+{% include mongo/k8s/examples/mongo-secret-tls.yaml %}
+{% endhighlight %}
+
+We can double-check that our keycert has been properly stored as a K8s secret:
+
+{% highlight shell %}
+kubectl get secret mongo-secret -o jsonpath="{.data['tls\.keycert']}" -n sec-datastores | base64 -d
+{% endhighlight %}
+
+Assuming that Secrets are stored in Base64 format in the Secret store which should not happen in a production environment!!. 
+
+And now we need to extend our StatefulSet definition to provide the different TLS parameters: 
+
+{% highlight yaml %}
+{% include mongo/k8s/examples/secured-mongo-tls.yaml %}
+{% endhighlight %}
+
+### Connecting to the Cluster through TLS
+
+We can connect to the cluster through TLS as follows: 
+
+{% highlight shell %}
+{% endhighlight %}
 
 ## 🖊️ Conclusions
 

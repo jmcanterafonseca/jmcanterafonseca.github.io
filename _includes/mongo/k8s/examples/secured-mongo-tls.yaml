@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-db-statefulset
+  labels:
+    mongoDB-replica: "true"
+    mongoDB-secured: "true"
+    mongoDB-sharding: "false"
+  annotations: 
+    author: JMCF
+  namespace: sec-datastores
+spec: 
+  selector: 
+    matchLabels:
+      app: mongoDB-replica
+  serviceName: mongo-db-replica
+  replicas: 3
+  template:
+    metadata: 
+      labels: 
+        app: mongoDB-replica
+    spec: 
+      terminationGracePeriodSeconds: 10
+      volumes: 
+        - name: initial-secret-volume
+          secret:
+            secretName: mongo-secret
+        - name: secret-volume
+          emptyDir: {}
+      initContainers:
+        - name: set-file-permissions
+          image: busybox
+          command:
+            - sh
+            - -c
+          args:
+            - >- 
+                 cp /var/init-secrets/replica.key /var/secrets/replica.key &&
+                 chmod 400 /var/secrets/replica.key &&
+                 chown 999:999 /var/secrets/replica.key;
+                 cp /var/init-secrets/tls.keycert /var/secrets/tls.keycert && 
+                 chmod 400 /var/secrets/tls.keycert &&
+                 chown 999:999 /var/secrets/tls.keycert
+          volumeMounts:
+            - mountPath: /var/init-secrets
+              name: initial-secret-volume
+              readOnly: true
+            - mountPath: /var/secrets
+              name: secret-volume
+              readOnly: false
+      containers: 
+        - name: mongo-db
+          image: mongo:4.2.6
+          ports: 
+            - containerPort: 27017
+              protocol: TCP
+          volumeMounts: 
+            - mountPath: /data/db
+              name: mongo-volume-for-replica
+            - mountPath: /var/secrets
+              name: secret-volume
+              readOnly: true
+          args: 
+            - --replSet
+            - $(REPLICA_SET_NAME)
+            - --auth
+            - --keyFile
+            - /var/secrets/replica.key
+            - --tlsMode
+            - requireTLS
+            - --tlsCertificateKeyFile
+            - /var/secrets/tls.keycert
+            - --tlsCAFile
+            - /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          envFrom: 
+            - configMapRef:
+                name: mongo-config
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root-user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: root-pwd
+  volumeClaimTemplates: 
+    - metadata: 
+        name: mongo-volume-for-replica
+      spec: 
+        accessModes: 
+          - ReadWriteOnce
+        resources: 
+          requests: 
+            storage: 100Mi
