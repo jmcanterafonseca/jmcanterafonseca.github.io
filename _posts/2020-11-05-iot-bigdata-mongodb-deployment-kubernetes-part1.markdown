@@ -9,9 +9,19 @@ comments: true
 
 ## 🎬 Introduction
 
-This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. To start with, the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive will be used to set up and deploy a [mongoDB Replica Set](https://docs.mongodb.com/manual/replication/) (cluster). Then, it will demonstrated how other Kubernetes primitives such as [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) can be applied to secure our initial, dummy deployment. The last article in this series will explain how to [shard](https://docs.mongodb.com/manual/sharding/) a mongoDB cluster. It is assumed that you already have an up and running K8s environment, such as [minikube](https://minikube.sigs.k8s.io/docs/start/). 
+This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. To start with, the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive will be used to set up and deploy a [mongoDB Replica Set](https://docs.mongodb.com/manual/replication/) (cluster). Then, it will demonstrated how other Kubernetes primitives such as [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) can be applied to secure our initial, dummy deployment. The last article in this series will explain how to [shard](https://docs.mongodb.com/manual/sharding/) a mongoDB cluster. 
 
+### Prerequisites
+
+It is assumed that you already have an up and running K8s environment, such as [minikube](https://minikube.sigs.k8s.io/docs/start/). 
 All the examples have been developed using minikube on macOS Catalina with VirtualBox. 
+
+First of all, a new, clean namespace named `datastores` is created to develop this part. 
+
+{% highlight shell %}
+kubectl create namespace datastores
+{% endhighlight %}
+
 
 ## 📖 StatefulSet Primitive
 
@@ -20,12 +30,6 @@ A **StatefulSet** is a K8s [Controller](https://kubernetes.io/docs/concepts/arch
 A StatefulSet shall be associated to a [Service](https://kubernetes.io/docs/concepts/services-networking/service/), to expose its Pods, and to a [PersistentVolumeClaim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) (PVC) template to gain persistent storage for Pods.  
 
 ## 🖥️ Basic Deployment of a mongoDB Replica Set
-
-First of all, a new, clean namespace named `datastores` is created. 
-
-{% highlight shell %}
-kubectl create namespace datastores
-{% endhighlight %}
 
 Then, we need to create a K8s *headless* Service intended to expose our StatefulSet, as follows: 
 

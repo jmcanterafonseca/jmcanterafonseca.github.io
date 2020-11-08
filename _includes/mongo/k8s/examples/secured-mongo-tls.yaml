@@ -72,6 +72,7 @@ spec:
             - /var/secrets/tls.keycert
             - --tlsCAFile
             - /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            - --tlsAllowConnectionsWithoutCertificates
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
