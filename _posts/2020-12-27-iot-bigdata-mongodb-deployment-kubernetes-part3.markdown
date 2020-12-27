@@ -33,11 +33,11 @@ After completing successfully these steps, it will only be possible to get acces
 
 First of all the following certificates have to be generated:
 
-* One certificate for cluster server TLS. [Already generated]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}) in part 2 of this series. 
+* One certificate for cluster server TLS. [Already generated]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}#-setting-up-the-tls-layer) in part 2 of this series. 
 * For each member of the Replica Set, one certificate for internal member authentication.
 * One certificate for client authentication. It will be needed as much certificates as clients our database is going to have. 
 
-For generating our certificates the steps already explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}) have to be followed:
+For generating our certificates the steps already explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}#-setting-up-the-tls-layer) have to be followed:
 
 * Generate a private key
 * Generate a certificate signing request. At this step the most important detail is the x509 DN (Distinguished Name) that will be the certificate's subject. For instance, the DNs that have been used for my deployment are:
@@ -47,7 +47,7 @@ For generating our certificates the steps already explained [here]({% post_url 2
 * `CN=mongo-db-statefulset-sh1-2.mongo-db-replica-sh1.sharding,OU=Software,O=CanteraFonseca,C=ES` for the third member of the Replica Set. 
 * `CN=App1,OU=Applications,O=CanteraFonseca,C=ES` for the database client to be used for testing.
 
-* As the Kubernetes cluster CA is being used to sign our certificates, for each certificate a new certificate signing request K8s manifest has to be generated and approved as explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}). Each certificate has to be retrieved, saved (in PEM format) and finally concatenated with its corresponding private key to create a "certkey" file. Thus, in the end we will have 3 "certkey" files (one for each Replica Set member), 1 "certkey" file corresponding to our database testing client and the "certkey" file we already generated in part 2 corresponding to the server TLS certificate of the whole cluster:
+* As the Kubernetes cluster CA is being used to sign our certificates, for each certificate a new certificate signing request K8s manifest has to be generated and approved as explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}#-setting-up-the-tls-layer). Each certificate has to be retrieved, saved (in PEM format) and finally concatenated with its corresponding private key to create a "certkey" file. Thus, in the end we will have 3 "certkey" files (one for each Replica Set member), 1 "certkey" file corresponding to our database testing client and the "certkey" file we already generated in part 2 corresponding to the server TLS certificate of the whole cluster:
 
 * `mongo.cluster.0.keycert`
 * `mongo.cluster.1.keycert`
@@ -59,7 +59,7 @@ For generating our certificates the steps already explained [here]({% post_url 2
 
 Unfortunately when it comes to certificate-based authentication mongoDB does not provide a deployment mechanism in one step. Thus, it is needed to perform a two step process. In the first step, bootstrapping step, a mongoDB cluster with no authentication will be run (as we explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %})). After configuring the cluster, in the second step, our K8s manifest will be reapplied  to set up the final configuration with certificate-based authentication enabled. 
 
-For bootstrapping the following steps have to be taken as explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1#%EF%B8%8F-basic-deployment-of-a-mongodb-replica-set %}):
+For bootstrapping the following steps have to be taken as explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %}#%EF%B8%8F-basic-deployment-of-a-mongodb-replica-set):
 
 * Apply the [Service](mongo/k8s/examples/sharding/mongo-service-sh1.yaml) and [ConfigMap](mongo/k8s/examples/sharding/mongo-config-sh1.yaml)
 * Apply the manifest below
@@ -68,7 +68,7 @@ For bootstrapping the following steps have to be taken as explained in [part 1](
 {% include mongo/k8s/examples/sharding/bootstrap-mongo.yaml %}
 {% endhighlight %}
 
-After the successful deployment of the statefulset above, the next step is to [set up the replica set]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1#configuring-the-mongodb-replica-set %}). Once the Replica Set has been set up, the cluster users as per the DNs already defined when certificates were generated have to be created (from the mongo client command line console) as follows:
+After the successful deployment of the statefulset above, the next step is to [set up the replica set]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %}#configuring-the-mongodb-replica-set). Once the Replica Set has been set up, the cluster users as per the DNs already defined when certificates were generated have to be created (from the mongo client command line console) as follows:
 
 {% highlight javascript %}
 {% include mongo/k8s/examples/sharding/add-users.js %}
