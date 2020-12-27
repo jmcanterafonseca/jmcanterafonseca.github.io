@@ -25,7 +25,7 @@ kubectl create namespace shard
 
 ## 📜 Enabling client and member authentication based on x509 certificates
 
-Our objective at this stage is to deploy a mongoDB Replica Set with client and member authentication based on x509 certificates. This Replica Set will be later part of our final mongoDB shard. 
+Our objective at this stage is to deploy a mongoDB Replica Set with client and member authentication based on x509 certificates (additional details about this architecture can be found [here](https://www.mongodb.com/blog/post/secure-mongodb-with-x-509-authentication)). This Replica Set will be later part of our final mongoDB shard. 
 
 After completing successfully these steps, it will only be possible to get access to the mongoDB cluster by presenting the proper client certificates and associated secret keys (i.e. no insecure user/pass anymore) packaged as "keycert" files. 
 
