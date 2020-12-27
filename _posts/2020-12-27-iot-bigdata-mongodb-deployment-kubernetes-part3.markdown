@@ -109,7 +109,7 @@ At this point in time, our mongoDB cluster can only be accessed by presenting a 
 
 
 {% highlight yaml %}
-{% include mongo/k8s/examples/sharding/secured-mongo-secret-client.yaml %}
+{% include mongo/k8s/examples/sharding/mongo-secret-client.yaml %}
 {% endhighlight %}
 
 It contains the keycert to be presented when connecting to our mongoDB cluster.
