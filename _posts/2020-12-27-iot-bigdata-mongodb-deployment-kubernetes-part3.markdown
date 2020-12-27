@@ -61,7 +61,7 @@ Unfortunately when it comes to certificate-based authentication mongoDB does not
 
 For bootstrapping the following steps have to be taken as explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %}#%EF%B8%8F-basic-deployment-of-a-mongodb-replica-set):
 
-* Apply the [Service](mongo/k8s/examples/sharding/mongo-service-sh1.yaml) and [ConfigMap](mongo/k8s/examples/sharding/mongo-config-sh1.yaml)
+* Apply the [Service](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/sharding/mongo-service-sh1.yaml) and [ConfigMap](https://github.com/jmcanterafonseca/jmcanterafonseca.github.io/blob/master/_includes/mongo/k8s/examples/sharding/mongo-config-sh1.yaml)
 * Apply the manifest below
 
 {% highlight yaml %}
