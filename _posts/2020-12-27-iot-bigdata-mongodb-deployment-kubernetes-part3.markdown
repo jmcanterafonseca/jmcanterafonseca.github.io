@@ -23,7 +23,7 @@ First of all, a new, clean namespace named `shard` has to be created to develop 
 kubectl create namespace shard
 {% endhighlight %}
 
-## 📖 Enabling client and member authentication based on x509 certificates
+## 📜 Enabling client and member authentication based on x509 certificates
 
 Our objective at this stage is to deploy a mongoDB Replica Set with client and member authentication based on x509 certificates. This Replica Set will be later part of our final mongoDB shard. 
 
@@ -143,7 +143,7 @@ After executing the command above, we will be under the mongo shell console prom
 {% include mongo/k8s/examples/sharding/authenticate.js %}
 {% endhighlight %}
 
-{% include remember.markdown content="We can authenticate as we are presenting a keycert file as a proof of our identity (`CN=App1,OU=Applications,O=CanteraFonseca,C=ES`)." %}
+{% include remember.markdown content="We can authenticate as, on the command line, we have already presented a keycert file as a proof of our identity (`CN=App1,OU=Applications,O=CanteraFonseca,C=ES`)." %}
 
 Once we are authenticated we can create a new database, named `test`, and insert a document into a collection `testCollection` as follows:
 
@@ -153,7 +153,7 @@ Once we are authenticated we can create a new database, named `test`, and insert
 
 Later, we can check that the data has been propagated to all members of our Replica Set by connecting to a `SECONDARY` cluster member, authenticating against it (using the procedure describe above), and querying the data on the `test` database (at this step don't forget to issue `rs.slaveOk()` before querying). 
 
-## 📖 Sharded mongoDB
+## 🔌 Sharded mongoDB
 
 To be developed. 
 
