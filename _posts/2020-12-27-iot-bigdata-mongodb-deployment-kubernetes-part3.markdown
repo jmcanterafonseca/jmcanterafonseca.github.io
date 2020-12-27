@@ -132,7 +132,7 @@ After executing the command above, we will be under the mongo shell console prom
 {% include mongo/k8s/examples/sharding/authenticate.js %}
 {% highlight shell %}
 
-{% include remember.markdown content="We can authenticate as we are presenting a "keycert" file as a proof of our identity (`CN=App1,OU=Applications,O=CanteraFonseca,C=ES`)." %}
+{% include remember.markdown content="We can authenticate as we are presenting a keycert file as a proof of our identity (`CN=App1,OU=Applications,O=CanteraFonseca,C=ES`)." %}
 
 Once we are authenticated we can create a new database, named `test`, and insert a document into a collection `testCollection` as follows:
 
