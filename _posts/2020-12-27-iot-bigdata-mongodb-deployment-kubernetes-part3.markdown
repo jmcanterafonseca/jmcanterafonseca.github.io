@@ -68,7 +68,7 @@ Thus, in the end we will have:
 
 ### Bootstrapping the mongoDB statefulset
 
-Unfortunately when it comes to certificate-based authentication mongoDB does not provide a deployment mechanism in one step. Thus, it is needed to perform a two step process. In the first step, bootstrapping step, a mongoDB cluster with no authentication will be run (as we explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %})). After configuring the cluster, in the second step, our K8s manifest will be reapplied  to set up the final configuration with certificate-based authentication enabled. 
+Unfortunately, when it comes to certificate-based authentication, mongoDB does not provide any deployment mechanism in one step. Thus, it is needed to perform a two step process. In the first step, bootstrapping step, a mongoDB cluster with no authentication will be run (as we explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %})). After configuring the cluster, in the second step, our K8s manifest will be reapplied to set up the final configuration with certificate-based authentication enabled. 
 
 For bootstrapping the following steps have to be taken as explained in [part 1]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %}#%EF%B8%8F-basic-deployment-of-a-mongodb-replica-set):
 
