@@ -10,7 +10,7 @@ comments: true
 
 ## 🎬 Introduction
 
-This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. In the [first part of this series]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %}), the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive has been used to set up and deploy a [mongoDB Replica Set](https://docs.mongodb.com/manual/replication/) (cluster). In the [second part]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part2 %}) it has been demonstrated how other Kubernetes primitives such as [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) can be applied to secure our initial, dummy deployment. This article of the series explains how to further secure (by enabling client and member mutual TLS authentication based on x509 certificates) and to [shard](https://docs.mongodb.com/manual/sharding/) our mongoDB Cluster. 
+This blog post series is intended to give an overview of how datastores capable of supporting high volumes of data from IoT devices and Big Data services can be deployed on Kubernetes. In the [first part of this series]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part1 %}), the [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) primitive has been used to set up and deploy a [mongoDB Replica Set](https://docs.mongodb.com/manual/replication/) (cluster). In the [second part]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}) it has been demonstrated how other Kubernetes primitives such as [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) can be applied to secure our initial, dummy deployment. This article of the series explains how to further secure (by enabling client and member mutual TLS authentication based on x509 certificates) and to [shard](https://docs.mongodb.com/manual/sharding/) our mongoDB Cluster. 
 
 ### Prerequisites
 
@@ -33,11 +33,11 @@ After completing successfully these steps, it will only be possible to get acces
 
 First of all the following certificates have to be generated:
 
-* One certificate for cluster server TLS. [Already generated]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}) in part 2 of this series. 
+* One certificate for cluster server TLS. [Already generated]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}) in part 2 of this series. 
 * For each member of the Replica Set, one certificate for internal member authentication.
 * One certificate for client authentication. It will be needed as much certificates as clients our database is going to have. 
 
-For generating our certificates the steps already explained [here]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}) have to be followed:
+For generating our certificates the steps already explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}) have to be followed:
 
 * Generate a private key
 * Generate a certificate signing request. At this step the most important detail is the x509 DN (Distinguished Name) that will be the certificate's subject. For instance, the DNs that have been used for my deployment are:
@@ -47,7 +47,7 @@ For generating our certificates the steps already explained [here]({% post_url 2
 * `CN=mongo-db-statefulset-sh1-2.mongo-db-replica-sh1.sharding,OU=Software,O=CanteraFonseca,C=ES` for the third member of the Replica Set. 
 * `CN=App1,OU=Applications,O=CanteraFonseca,C=ES` for the database client to be used for testing.
 
-* As the Kubernetes cluster CA is being used to sign our certificates, for each certificate a new certificate signing request K8s manifest has to be generated and approved as explained [here]({% post_url 2020-11-05-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}). Each certificate has to be retrieved, saved (in PEM format) and finally concatenated with its corresponding private key to create a "certkey" file. Thus, in the end we will have 3 "certkey" files (one for each Replica Set member), 1 "certkey" file corresponding to our database testing client and the "certkey" file we already generated in part 2 corresponding to the server TLS certificate of the whole cluster:
+* As the Kubernetes cluster CA is being used to sign our certificates, for each certificate a new certificate signing request K8s manifest has to be generated and approved as explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2#-setting-up-the-tls-layer %}). Each certificate has to be retrieved, saved (in PEM format) and finally concatenated with its corresponding private key to create a "certkey" file. Thus, in the end we will have 3 "certkey" files (one for each Replica Set member), 1 "certkey" file corresponding to our database testing client and the "certkey" file we already generated in part 2 corresponding to the server TLS certificate of the whole cluster:
 
 * `mongo.cluster.0.keycert`
 * `mongo.cluster.1.keycert`
