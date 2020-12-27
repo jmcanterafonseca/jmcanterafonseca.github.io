@@ -48,21 +48,21 @@ For generating our certificates the steps already explained [here]({% post_url 2
 
   * `CN=App1,OU=Applications,O=CanteraFonseca,C=ES` for the database client to be used for testing.
 
-* As the Kubernetes cluster CA is being used to sign our certificates, for each certificate a new certificate signing request K8s manifest has to be generated and approved as explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}#-setting-up-the-tls-layer). Each certificate has to be retrieved, saved (in PEM format) and finally concatenated with its corresponding private key to create a "certkey" file. 
+* As the Kubernetes cluster CA is being used to sign our certificates, for each certificate a new certificate signing request K8s manifest has to be generated and approved as explained [here]({% post_url 2020-11-08-iot-bigdata-mongodb-deployment-kubernetes-part2 %}#-setting-up-the-tls-layer). Each certificate has to be retrieved, saved (in PEM format) and finally concatenated with its corresponding private key to create a "keycert" file. 
 
 Thus, in the end we will have:
 
-* 3 "certkey" files (one for each Replica Set member):
+* 3 "keycert" files (one for each Replica Set member):
 
   * `mongo.cluster.0.keycert`
   * `mongo.cluster.1.keycert`
   * `mongo.cluster.2.keycert`
 
-* 1 "certkey" file corresponding to our database testing client:
+* 1 "keycert" file corresponding to our database testing client:
 
   * `client.keycert`
 
-* the "certkey" file we already generated in part 2 corresponding to the server TLS certificate of the whole cluster:
+* the "keycert" file we already generated in part 2 corresponding to the server TLS certificate of the whole cluster:
 
   * `mongo.ext.keycert`
 
