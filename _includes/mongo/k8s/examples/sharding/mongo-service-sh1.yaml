@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mongo-db-replica-sh1
+  namespace: sharding
+spec: 
+  selector: 
+    app: mongoDB-replica-sh1
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  clusterIP: None
+   

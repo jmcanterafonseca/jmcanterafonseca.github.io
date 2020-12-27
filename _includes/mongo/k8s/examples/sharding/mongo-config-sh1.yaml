@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config-sh1 
+  namespace: sharding
+  annotations:
+    tls-values: "disabled, allowTLS, preferTLS, requireTLS"
+data:
+  REPLICA_SET_NAME: replica-blog-sh-1
+  TLS: requireTLS

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-db-statefulset-sh1
+  labels:
+    mongoDB-replica: "true"
+    mongoDB-secured: "false"
+    mongoDB-sharding: "true"
+  annotations: 
+    author: JMCF
+  namespace: sharding
+spec: 
+  selector: 
+    matchLabels:
+      app: mongoDB-replica-sh1
+  serviceName: mongo-db-replica-sh1
+  replicas: 3
+  template:
+    metadata: 
+      labels: 
+        app: mongoDB-replica-sh1
+    spec: 
+      terminationGracePeriodSeconds: 10
+      containers: 
+        - name: mongo-db
+          image: mongo:4.2.6
+          ports: 
+            - containerPort: 27017
+              protocol: TCP
+          volumeMounts: 
+            - mountPath: /data/db
+              name: mongo-volume-for-replica                  
+          args: 
+            - --replSet
+            - $(REPLICA_SET_NAME)
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          envFrom: 
+            - configMapRef:
+                name: mongo-config-sh1
+  volumeClaimTemplates: 
+    - metadata: 
+        name: mongo-volume-for-replica
+      spec: 
+        accessModes: 
+          - ReadWriteOnce
+        resources: 
+          requests: 
+            storage: 100Mi
