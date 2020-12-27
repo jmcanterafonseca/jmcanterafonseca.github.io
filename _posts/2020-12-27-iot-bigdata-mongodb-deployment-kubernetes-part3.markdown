@@ -124,13 +124,13 @@ It can be observed that a volume with our keycert file secret has been properly 
 
 {% highlight shell %}
 kubectl run tm-mongo-pod --image=mongo:4.2.6 --rm=true -it --restart=Never --namespace=sharding --overrides="$(cat mongo-client.json)"
-{% highlight shell %}
+{% endhighlight %}
 
 After executing the command above, we will be under the mongo shell console prompt but not authenticated yet. In order to authenticate the following Javascript sentence has to be executed (at this time, against the `PRIMARY` Replica Set member):
 
 {% highlight javascript %}
 {% include mongo/k8s/examples/sharding/authenticate.js %}
-{% highlight shell %}
+{% endhighlight %}
 
 {% include remember.markdown content="We can authenticate as we are presenting a keycert file as a proof of our identity (`CN=App1,OU=Applications,O=CanteraFonseca,C=ES`)." %}
 
@@ -138,7 +138,7 @@ Once we are authenticated we can create a new database, named `test`, and insert
 
 {% highlight javascript %}
 {% include mongo/k8s/examples/sharding/db-operations-sh1.js %}
-{% highlight shell %}
+{% endhighlight %}
 
 Later, we can check that the data has been propagated to all members of our Replica Set by connecting to a `SECONDARY` cluster member, authenticating against it (using the procedure describe above), and querying the data on the `test` database (at this step don't forget to issue `rs.slaveOk()` before querying). 
 
