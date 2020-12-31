@@ -3,7 +3,7 @@
 set -e
 
 help () {
-  echo "usage: gen-cert.sh [name] [DN]"
+  echo "usage: gen-cert.sh [name] [DN] [config]"
 }
 
 if [ $#  -lt 2 ]; then
@@ -14,12 +14,21 @@ fi
 
 NAME=$1
 DN=$2
+CONFIG_PARAM=$3
+CONFIG=
+
 
 # Create Private Key 
 openssl genrsa -out $NAME.key.pem 2048
 
+if [ ! -z "$CONFIG_PARAM" ]; 
+then CONFIG=" -config $CONFIG_PARAM"; 
+fi
+
+echo $CONFIG
+
 # Create CSR 
-openssl req -new -out $NAME.csr -key $NAME.key.pem -subj $DN
+openssl req -new -out $NAME.csr -key $NAME.key.pem -subj $DN $CONFIG
 
 CSR_BASE64=$(cat $NAME.csr | base64 | tr -d "\n")
 

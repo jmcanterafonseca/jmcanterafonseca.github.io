@@ -1,7 +1,25 @@
+#!/bin/bash
+
+set -e
+
+help () {
+  echo "usage: secured-mongo.sh [name] [role]"
+}
+
+if [ $#  -lt 1 ]; then
+  echo "Illegal number of parameters"
+  help
+  exit 1
+fi
+
+NAME=$1
+ROLE=$2
+
+cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo-db-statefulset-sh1
+  name: mongo-db-statefulset-$NAME
   labels:
     mongoDB-replica: "true"
     mongoDB-secured: "true"
@@ -12,19 +30,19 @@ metadata:
 spec: 
   selector: 
     matchLabels:
-      app: mongoDB-replica-sh1
-  serviceName: mongo-db-replica-sh1
+      app: mongoDB-replica-$NAME
+  serviceName: mongo-db-replica-$NAME
   replicas: 3
   template:
     metadata: 
       labels: 
-        app: mongoDB-replica-sh1
+        app: mongoDB-replica-$NAME
     spec: 
       terminationGracePeriodSeconds: 10
       volumes: 
         - name: initial-secret-volume
           secret:
-            secretName: mongo-secret-sh1
+            secretName: mongo-secret-$NAME
         - name: secret-volume
           emptyDir: {}
       initContainers:
@@ -43,8 +61,8 @@ spec:
                  cp /var/init-secrets/tls.keycert /var/secrets/tls.keycert && 
                  chmod 400 /var/secrets/tls.keycert &&
                  chown 999:999 /var/secrets/tls.keycert;
-                 export POD_NUMBER=${POD_NAME##*-} && 
-                 cp /var/init-secrets/tls.cluster.$POD_NUMBER.keycert /var/secrets/tls.cluster.keycert && 
+                 export POD_NUMBER=\${POD_NAME##*-} && 
+                 cp /var/init-secrets/tls.cluster.\$POD_NUMBER.keycert /var/secrets/tls.cluster.keycert && 
                  chmod 400 /var/secrets/tls.cluster.keycert &&
                  chown 999:999 /var/secrets/tls.cluster.keycert;
           volumeMounts:
@@ -62,13 +80,13 @@ spec:
               protocol: TCP
           volumeMounts: 
             - mountPath: /data/db
-              name: mongo-volume-for-replica
+              name: mongo-volume-for-replica-$NAME
             - mountPath: /var/secrets
               name: secret-volume
               readOnly: true
           args: 
             - --replSet
-            - $(REPLICA_SET_NAME)
+            - \$(REPLICA_SET_NAME)
             - --tlsMode
             - requireTLS
             - --clusterAuthMode 
@@ -79,6 +97,7 @@ spec:
             - /var/secrets/tls.keycert
             - --tlsCAFile
             - /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            - $ROLE
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
@@ -87,10 +106,11 @@ spec:
                 name: mongo-config-sh1
   volumeClaimTemplates: 
     - metadata: 
-        name: mongo-volume-for-replica
+        name: mongo-volume-for-replica-$NAME
       spec: 
         accessModes: 
           - ReadWriteOnce
         resources: 
           requests: 
-            storage: 100Mi
+            storage: 200Mi
+EOF
