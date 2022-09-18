@@ -157,6 +157,22 @@ Later, we can check that the data has been propagated to all members of our Repl
 
 To be developed. 
 
+https://docs.mongodb.com/manual/_images/sharded-cluster-production-architecture.bakedsvg.svg
+https://docs.mongodb.com/manual/_images/sharded-cluster-mixed.bakedsvg.svg
+https://docs.mongodb.com/manual/_images/sharded-cluster-production-architecture.bakedsvg.svg
+
+sh.splitAt( "tsharding.col1", { age: 50 } )
+
+use tsharding;
+
+db.adminCommand( {
+   enableSharding: "tsharding"
+} );
+
+db.col1.createIndex({ age: 1})
+db.adminCommand( { shardCollection: "tsharding.col1", key: { age: 1 } } );
+
+
 ## 🖊️ Conclusions
 
 Kubernetes provides powerful primitives to deploy a clustered mongoDB datastore service. Furthermore, we can deploy a secured and sharded mongoDB so that we can give production-grade support to IoT and Big Data Applications which demand higher scalability. 

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: sharding
+  name: mongos-deployment
+  labels:
+    mongoDB-sharding: "true"
+    mongoDB-secured: "false"
+  annotations: 
+    author: JMCF
+spec:
+  selector: 
+    matchLabels:
+      app: mongos
+  replicas: 3
+  template:
+    metadata: 
+      labels: 
+        app: mongos
+    spec: 
+      terminationGracePeriodSeconds: 10
+      containers: 
+        - name: mongo-db
+          image: mongo:4.2.6
+          ports: 
+            - containerPort: 27017
+              protocol: TCP
+          command:
+            - mongos         
+          args:
+            - --verbose
+            - --bind_ip_all 
+            - --configdb          
+            - replica-blog-config-server/mongo-db-statefulset-config-server-0.mongo-db-replica-config-server.sharding.svc.cluster.local:27019,
+              mongo-db-statefulset-config-server-1.mongo-db-replica-config-server.sharding.svc.cluster.local:27019,
+              mongo-db-statefulset-config-server-2.mongo-db-replica-config-server.sharding.svc.cluster.local:27019
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent

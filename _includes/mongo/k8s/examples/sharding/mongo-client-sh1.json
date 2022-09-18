@@ -5,13 +5,13 @@
       {
         "name": "initial-secret-volume",
         "secret": {
-          "secretName": "mongo-secret-client"
+          "secretName": "mongo-secret-mongos"
         }
       }
     ],
     "containers": [
       {
-        "name": "tm-mongo-pod-mongos",
+        "name": "tm-mongo-pod-sh1",
         "image": "mongo:4.2.6",
         "stdin": true,
         "tty": true,
@@ -22,8 +22,8 @@
           "--tlsCAFile", 
           "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
           "--tlsCertificateKeyFile",
-          "/var/init-secrets/tls.client.keycert",
-          "mongos.sharding.svc.cluster.local"
+          "/var/init-secrets/tls.cluster.keycert",
+          "mongo-db-statefulset-sh1-0.mongo-db-replica-sh1.sharding.svc.cluster.local:27018"
         ],
         "volumeMounts": [
           {

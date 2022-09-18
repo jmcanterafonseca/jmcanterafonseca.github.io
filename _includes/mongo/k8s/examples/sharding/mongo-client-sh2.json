@@ -11,7 +11,7 @@
     ],
     "containers": [
       {
-        "name": "tm-mongo-pod-mongos",
+        "name": "tm-mongo-pod-sh2",
         "image": "mongo:4.2.6",
         "stdin": true,
         "tty": true,
@@ -23,7 +23,7 @@
           "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
           "--tlsCertificateKeyFile",
           "/var/init-secrets/tls.client.keycert",
-          "mongos.sharding.svc.cluster.local"
+          "mongo-db-statefulset-sh2-1.mongo-db-replica-sh2.sharding.svc.cluster.local:27018"
         ],
         "volumeMounts": [
           {

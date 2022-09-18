@@ -3,7 +3,7 @@
 set -e
 
 help () {
-  echo "usage: bootstrap-mongo.sh [name]"
+  echo "usage: bootstrap-mongo.sh [name] [role]"
 }
 
 if [ $#  -lt 1 ]; then
@@ -13,7 +13,57 @@ if [ $#  -lt 1 ]; then
 fi
 
 NAME=$1
-ROLE=$2
+ROLE_PARAM=$2
+ROLE=
+
+if [ "$ROLE_PARAM" != "configsvr" ] && [ "$ROLE_PARAM" != "shardsvr" ]; then 
+  echo "role must be 'configsvr' or 'shardsvr'"
+  help
+  exit 1
+fi
+
+if [ ! -z "$ROLE_PARAM" ]; 
+then ROLE="--$ROLE_PARAM"; 
+fi
+
+PORT=27017
+
+if [ $ROLE_PARAM == "configsvr" ];
+then PORT=27019;
+fi
+
+if [ $ROLE_PARAM == "shardsvr" ];
+then PORT=27018;
+fi
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config-$NAME
+  namespace: sharding
+  annotations:
+    tls-values: "disabled, allowTLS, preferTLS, requireTLS"
+data:
+  REPLICA_SET_NAME: replica-blog-$NAME
+  TLS: requireTLS
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mongo-db-replica-$NAME
+  namespace: sharding
+spec: 
+  selector: 
+    app: mongoDB-replica-$NAME
+  ports:
+    - protocol: TCP
+      port: $PORT
+      targetPort: $PORT
+  clusterIP: None
+EOF
 
 cat <<EOF | kubectl apply -f -
 apiVersion: apps/v1

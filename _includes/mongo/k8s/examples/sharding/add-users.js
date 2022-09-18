@@ -39,3 +39,54 @@ db.getSiblingDB("$external").runCommand(
     writeConcern: { w: "majority", wtimeout: 5000 }
   }
 );
+
+db.getSiblingDB("$external").runCommand(
+  {
+    createUser: "CN=mongos.sharding,OU=Software,O=CanteraFonseca,C=ES",
+    roles: [
+      { role: "__system", db: "admin" }
+    ],
+    writeConcern: { w: "majority", wtimeout: 5000 }
+  }
+);
+
+
+db.getSiblingDB("$external").runCommand(
+  {
+    createUser: "CN=mongo-db-statefulset-sh2-0.mongo-db-replica-sh2.sharding,OU=Software,O=CanteraFonseca,C=ES",
+    roles: [
+      { role: "__system", db: "admin" }
+    ],
+    writeConcern: { w: "majority", wtimeout: 5000 }
+  }
+);
+
+db.getSiblingDB("$external").runCommand(
+  {
+    createUser: "CN=mongo-db-statefulset-sh2-1.mongo-db-replica-sh2.sharding,OU=Software,O=CanteraFonseca,C=ES",
+    roles: [
+      { role: "__system", db: "admin" }
+    ],
+    writeConcern: { w: "majority", wtimeout: 5000 }
+  }
+);
+
+db.getSiblingDB("$external").runCommand(
+  {
+    createUser: "CN=mongo-db-statefulset-sh2-2.mongo-db-replica-sh2.sharding,OU=Software,O=CanteraFonseca,C=ES",
+    roles: [
+      { role: "__system", db: "admin" }
+    ],
+    writeConcern: { w: "majority", wtimeout: 5000 }
+  }
+);
+
+db.getSiblingDB("$external").runCommand(
+  {
+    createUser: "CN=mongos.sharding,OU=Software,O=CanteraFonseca,C=ES",
+    roles: [
+      { role: "__system", db: "admin" }
+    ],
+    writeConcern: { w: "majority", wtimeout: 5000 }
+  }
+);
