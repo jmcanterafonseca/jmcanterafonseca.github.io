@@ -3,6 +3,7 @@ layout: post
 title:  "Javascript .- The Definitive Guide .- 2020 Edition .- Review"
 description: "This blog post provides a review of David Flanagan's book on Javascript. (2020 Edition)"
 date:   2020-09-12 08:00:00 +0200
+archived: true
 categories: Javascript Flanagan 7th Edition Book Review
 comments: false 
 ---

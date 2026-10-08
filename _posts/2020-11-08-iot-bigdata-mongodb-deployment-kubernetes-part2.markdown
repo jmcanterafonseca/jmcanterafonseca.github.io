@@ -3,6 +3,7 @@ layout: post-with-toc
 title:  "Deploying datastores for IoT & Big Data: mongoDB on K8s. Part 2"
 description: "This blog post describes how a secured mongoDB replica set can be deployed on Kubernetes"
 date:   2020-11-08 08:00:00 +0200
+archived: true
 categories: K8s Kubernetes statefulset mongoDB replica set security IoT Big Data TLS cloud native computing
 comments: true 
 ---

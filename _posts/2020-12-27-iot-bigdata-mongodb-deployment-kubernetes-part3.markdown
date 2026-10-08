@@ -3,6 +3,7 @@ layout: post-with-toc
 title:  "Deploying datastores for IoT & Big Data: mongoDB on K8s. Part 3"
 description: "This blog post describes how an authenticated mongoDB shard can be deployed on Kubernetes"
 date:   2020-12-27 08:00:00 +0200
+archived: true
 categories: K8s Kubernetes statefulset mongoDB replica set security IoT Big Data TLS cloud native computing sharding x509 authentication client member
 comments: true 
 ---

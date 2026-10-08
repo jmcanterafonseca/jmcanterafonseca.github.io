@@ -3,6 +3,7 @@ layout: post-with-toc
 title:  "CKAD Exam Preparation 4/4 - Deployments, Services and Networking"
 description: "This part outlines the key deployment and networking aspects of the CKAD Exam Curriculum"
 date:   2020-06-24 08:00:00 +0200
+archived: true
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD deployments services
 ---
 

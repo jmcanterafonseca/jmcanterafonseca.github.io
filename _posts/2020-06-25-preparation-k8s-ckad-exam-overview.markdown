@@ -4,6 +4,7 @@ title:  "CKAD Exam Preparation - Overview"
 description: "This blog post series summarizes the study notes I have been taking during the preparation of 
 the Certified Kubernetes Application Developer (CKAD) Exam"
 date:   2020-06-25 08:00:00 +0200
+archived: true
 categories: Kubernetes Certification Application Developer CNCF K8s Cloud Native Computing CKAD
 comments: false 
 ---
