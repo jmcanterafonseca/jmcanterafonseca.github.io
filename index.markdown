@@ -5,11 +5,9 @@ title: Home
 
 # Jose Manuel Cantera Fonseca
 
-I am a senior applied research engineer focused on open standards, software architecture, semantic web, mobile systems, the Internet of Things, and blockchain. My work has centered on turning emerging technologies into practical, scalable solutions for society, from the early mobile web and FirefoxOS to connected smart-city platforms and decentralized digital ecosystems.
+I am a senior applied research engineer focused on open standards, platforms and software architecture. I am well versed on key technologies such as digital identity, the semantic web and knowledge graphs, mobile and ubiquitous computing, IoT and decentralized systems (DLT, blockchain, dataspaces). Over the years, I have contributed to different standards initiatives in W3C, ETSI, GS1, and UN/CEFACT. My work has been centered on applying emerging technologies to devise new architectures and solutions across multiple domains: context awareness in mobile computing, consumer devices based on the open web, portable IoT applications for smart cities and supply chain traceability and circularity. 
 
-Over the years, I have contributed to initiatives and standards in W3C, ETSI, GS1, and UN/CEFACT, helping shape technologies for interoperable data, context-aware systems, and value-chain innovation. I have led technical work across IoT platforms, identity, supply-chain traceability, and circular-economy applications, combining research, architecture, and implementation to build systems that can be adopted in the real world.
-
-[About me](/about/)
+[More Details about me](/about/)
 
 ## Recent Posts
 
