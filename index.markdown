@@ -17,6 +17,8 @@ My work has been centered on applying emerging technologies to devise new archit
 
 [Professional Portfolio (2026)](/blobs/JoseManuelCantera_2026_Professional_Portfolio.docx.pdf)
 
+[ORCID](https://orcid.org/0009-0000-1188-0136)
+
 ## Recent Posts
 
 {% assign recent_posts = site.posts | where_exp: "post", "post.archived != true" %}
