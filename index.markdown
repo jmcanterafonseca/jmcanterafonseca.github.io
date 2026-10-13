@@ -9,9 +9,11 @@ I am a senior ICT professional focused on open standards, platforms and software
 
 [More Details about me](/about/)
 
-## Expertise
+## Projects and portfolio
 
 My work has been centered on applying emerging technologies to devise new architectures and solutions across multiple domains: context awareness in mobile computing, consumer devices based on the open web, portable IoT applications for smart cities and supply chain traceability and circularity.
+
+[Projects along my professional life](https://www.linkedin.com/in/jmcanterafonseca/details/projects/)
 
 [Professional Portfolio (2026)](/blobs/JoseManuelCantera_2026_Professional_Portfolio.docx.pdf)
 
